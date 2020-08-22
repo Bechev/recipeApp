@@ -1,3 +1,19 @@
-.App {
-  text-align: center;
+
+
+.AppContent{
+  margin: 2% 25% 2% 25%;
+}
+
+
+@media screen and (max-width: 900px) {
+  .AppContent{
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .AppContent{
+    margin: 2%;
+  }
 }
