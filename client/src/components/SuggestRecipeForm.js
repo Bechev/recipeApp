@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Form, Button, Col} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import './SuggestRecipeForm.css'
 
 class SuggestRecipeForm extends Component {
 
@@ -9,10 +10,14 @@ class SuggestRecipeForm extends Component {
         this.state = {
             validated: false,
             numberOfIngredients: 1,
-            numberOfInstructionsSteps: 1
+            numberOfInstructionsSteps: 1,
+            unitsOptions: ['g', 'mg', 'tsp', 'tbsp']
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.renderIngredients = this.renderIngredients.bind(this)
+        this.removeIngredientField = this.removeIngredientField.bind(this)
+        this.removeInstructionField = this.removeInstructionField.bind(this)
+        this.renderUnitsOptions = this.renderUnitsOptions.bind(this)
     }
 
     handleSubmit(event){
@@ -25,29 +30,49 @@ class SuggestRecipeForm extends Component {
         this.setState({validated: true})
     };
 
+    removeIngredientField(){
+        this.setState({numberOfIngredients: this.state.numberOfIngredients - 1})
+    }
+
+     removeInstructionField(){
+        this.setState({numberOfInstructionsSteps: this.state.numberOfInstructionsSteps - 1})
+    }
+
+    renderUnitsOptions(){
+        return(
+            this.state.unitsOptions.map((unit, key) => {
+                return(
+                    <option key={key}>{unit}</option>
+                )
+            })
+        )
+    }
+
     renderIngredients(){
         let ingredients = []
         for(let i = 0; i < this.state.numberOfIngredients; i ++){
             ingredients.push(
-                <span key={i}>
-                    <Form.Row>
-                        <Form.Label>Ingredient {i+1}</Form.Label>
-                    </Form.Row>
+                <React.Fragment key={i}>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label as= {Col}>Measure</Form.Label>
-                            <Form.Control type="text"/>
+                            <Form.Control type="text" required/>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Label as= {Col}>Unit</Form.Label>
-                            <Form.Control type="text"/>
+                            <Form.Label className='formDropDown'>Measure</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose...">
+                                {this.renderUnitsOptions()}
+                            </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label as= {Col}>Ingredient</Form.Label>
-                            <Form.Control type="text"/>
+                            <Form.Control type="text" required/>
+                        </Form.Group>
+                        <Form.Group as={Col} className="removeGroup">
+                            {i === (this.state.numberOfIngredients - 1) && (this.state.numberOfIngredients > 1) ? <Button variant="secondary" className='removeIngredientButton' onClick={this.removeIngredientField}>-</Button> : null}
                         </Form.Group>
                     </Form.Row>
-                </span>
+                </React.Fragment>
             )
         }
         return ingredients
@@ -57,9 +82,14 @@ class SuggestRecipeForm extends Component {
         let instructions = []
         for(let i = 0; i < this.state.numberOfInstructionsSteps; i ++){
             instructions.push(
-                <Form.Row key={i}>
-                    <Form.Label>Step {i+1}</Form.Label>
-                    <Form.Control type="text"/>
+                <Form.Row key={i} className="instructionsRow">
+                    <Form.Group as={Col}>
+                        <Form.Label>Step {i+1}</Form.Label>
+                        <Form.Control type="text"/>
+                    </Form.Group>
+                    <Form.Group as={Col} className="removeGroup removeInstruction">
+                        {i === (this.state.numberOfInstructionsSteps - 1) && (this.state.numberOfInstructionsSteps > 1) ? <Button variant="secondary" className='removeButton' onClick={this.removeInstructionField}>-</Button> : null}
+                    </Form.Group>
                 </Form.Row>
             )
         }
@@ -99,12 +129,12 @@ class SuggestRecipeForm extends Component {
                     <Form.Row>
                         <Form.Label>Instructions</Form.Label>
                     </Form.Row>
-                    {this.renderInstructions()}
+                        {this.renderInstructions()}
                     <Form.Row>
-                        <Button variant="secondary" type="button" onClick={()=>this.addToState('instruction')}> Add Ingredient </Button>
+                        <Button variant="secondary" type="button" onClick={()=>this.addToState('instruction')}> Add Instruction</Button>
                     </Form.Row>
-                    <Form.Row>
                     <br/>
+                    <Form.Row>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
