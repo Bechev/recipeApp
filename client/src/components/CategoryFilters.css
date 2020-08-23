@@ -1,0 +1,24 @@
+.categoryFilters{
+    display: flex;
+    flex-direction: row;
+}
+
+.categoryFilter{
+    width: 33%;
+}
+
+/* @media screen and (max-width: 900px) {
+    .AppContent{
+      margin-left: 20%;
+      margin-right: 20%;
+    }
+  }
+   */
+  @media screen and (max-width: 600px) {
+    .categoryFilters{
+        flex-direction: column;
+    }
+    .categoryFilter{
+        width: 100%;
+    }
+  }
