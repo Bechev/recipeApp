@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Card, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import image_placeholder from '../Assets/image_placeholder.jpg'
+import './RecipeCard.css'
 
 class RecipeCard extends Component {
     
@@ -9,10 +11,10 @@ class RecipeCard extends Component {
 
         return(
             <div className="recipeCard">
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                <Card>
+                    <Card.Img variant="top" src={image_placeholder} />
                     <Card.Body>
-                        <Card.Title>Recipe Whatever but a long title to see what it does and if i like it or not otherwise i will do something else</Card.Title>
+                        <Card.Title>12345678912345</Card.Title>
                         <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.

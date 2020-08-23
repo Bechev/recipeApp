@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import GroceriesList from '../components/GroceriesList.js'
 
 class Bag extends Component {
     
@@ -8,7 +9,7 @@ class Bag extends Component {
 
         return(
             <div className="bag">
-                Shopping bag
+                <GroceriesList/>
             </div>
             )
         }
