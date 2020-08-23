@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import CategoryViewer from '../components/CategoryViewer.js'
+import CategoryLists from '../components/CategoryLists.js'
 
 class Browse extends Component {
     
@@ -8,7 +10,8 @@ class Browse extends Component {
 
         return(
             <div className="browse">
-                Browse
+                <CategoryLists/>
+                <CategoryViewer/>
             </div>
             )
         }

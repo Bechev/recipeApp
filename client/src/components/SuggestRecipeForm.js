@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, FormControl, FormLabel, Button, Row, Col} from 'react-bootstrap';
+import {Form, Button, Col} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
 class SuggestRecipeForm extends Component {
