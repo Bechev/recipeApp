@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown, Form,FormControl} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import './CustomNavBar.css'
 
 class CustomNavBar extends Component {
 
@@ -8,8 +9,12 @@ class CustomNavBar extends Component {
 
         return(
             <div className="customNavBar">
-                <Navbar bg="light" expand="lg">
+                <Navbar expanded={false} bg="light" expand="lg">
                     <Navbar.Brand href="/">Simmering</Navbar.Brand>
+                    <Form inline>
+                        <FormControl type="text" placeholder="Search" className="searchBar" />
+                    {/* <Button variant="outline-success">Search</Button> */}
+                    </Form>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
@@ -23,11 +28,8 @@ class CustomNavBar extends Component {
                             <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                         </NavDropdown> */}
                         </Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        {/* <Button variant="outline-success">Search</Button> */}
-                        </Form>
                     </Navbar.Collapse>
+                    
                 </Navbar>
             </div>
             )
