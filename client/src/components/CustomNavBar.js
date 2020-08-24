@@ -13,7 +13,6 @@ class CustomNavBar extends Component {
                     <Navbar.Brand href="/">Simmering</Navbar.Brand>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="searchBar" />
-                    {/* <Button variant="outline-success">Search</Button> */}
                     </Form>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -22,11 +21,6 @@ class CustomNavBar extends Component {
                         <Nav.Link href="/shopping bag">My Cart</Nav.Link>
                         <Nav.Link href="/browse">Browse</Nav.Link>
                         <Nav.Link href="/profile">Profile</Nav.Link>
-                        {/* <NavDropdown title="Menu" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/suggest a recipe">Suggest a recipe</NavDropdown.Item>
-                            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-                        </NavDropdown> */}
                         </Nav>
                     </Navbar.Collapse>
                     

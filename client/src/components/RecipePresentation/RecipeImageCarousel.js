@@ -22,10 +22,6 @@ class RecipeImageCarousel extends Component {
                     src={require("../../Assets/image_placeholder.jpg")}
                     alt="placeholder"
                     />
-                    <Carousel.Caption>
-                        <h3>We don't have an image</h3>
-                        <p>Feel free to cook and submit yours!</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
             )
         }else{
@@ -38,10 +34,6 @@ class RecipeImageCarousel extends Component {
                             src={require(`${image.path}`)}
                             alt={image.path}
                             />
-                            <Carousel.Caption>
-                                <h3>Recipe Name</h3>
-                                <p>Recipe Description</p>
-                            </Carousel.Caption>
                         </Carousel.Item>
                     )
                 })
