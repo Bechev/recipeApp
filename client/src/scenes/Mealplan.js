@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import MealPlanFilters from '../components/MealPlanFilters.js'
 
 class Mealplan extends Component {
     
@@ -8,7 +9,7 @@ class Mealplan extends Component {
 
         return(
             <div className="mealplan">
-                MealPlan
+                <MealPlanFilters/>
             </div>
             )
         }
