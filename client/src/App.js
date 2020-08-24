@@ -11,6 +11,7 @@ import Bag from './scenes/Bag.js';
 import Browse from './scenes/Browse.js';
 import Profile from './scenes/Profile.js';
 import NotFoundPage from './scenes/NotFoundPage.js';
+import Recipe from './scenes/Recipe.js';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path='/signup' component={Signup}/>
                 <Route exact path='/suggest a recipe' component={SuggestRecipe}/>
                 <Route exact path='/mealplan' component={MealPlan}/>
+                <Route exact path='/recipe' component={Recipe}/>
                 <Route exact path='/shopping bag' component={Bag}/>
                 <Route exact path='/browse' component={Browse}/>
                 <Route exact path='/profile' component={Profile}/>
