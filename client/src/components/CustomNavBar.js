@@ -16,11 +16,12 @@ class CustomNavBar extends Component {
                         <Nav.Link href="/mealplan">Mealplan</Nav.Link>
                         <Nav.Link href="/shopping bag">My Cart</Nav.Link>
                         <Nav.Link href="/browse">Browse</Nav.Link>
-                        <NavDropdown title="Menu" id="basic-nav-dropdown">
+                        <Nav.Link href="/profile">Profile</Nav.Link>
+                        {/* <NavDropdown title="Menu" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/suggest a recipe">Suggest a recipe</NavDropdown.Item>
                             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

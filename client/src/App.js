@@ -10,7 +10,6 @@ import MealPlan from './scenes/Mealplan.js';
 import Bag from './scenes/Bag.js';
 import Browse from './scenes/Browse.js';
 import Profile from './scenes/Profile.js';
-import Settings from './scenes/Settings.js';
 import NotFoundPage from './scenes/NotFoundPage.js';
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
                 <Route exact path='/shopping bag' component={Bag}/>
                 <Route exact path='/browse' component={Browse}/>
                 <Route exact path='/profile' component={Profile}/>
-                <Route exact path='/settings' component={Settings}/>
                 <Route path="/404" component={NotFoundPage} />
                 <Redirect to="/404" />
             </Switch>
