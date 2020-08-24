@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import {Accordion, Card, Form} from 'react-bootstrap';
+import {Accordion, Card} from 'react-bootstrap';
 
 
 class MealPlanFilters extends Component {
