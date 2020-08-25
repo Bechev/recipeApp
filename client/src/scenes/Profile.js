@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import Logout from '../components/Logout.js'
+import UserPreferences from '../components/UserPreferences.js'
+import PreviousMealplans from '../components/PreviousMealplans.js'
 
 class Profile extends Component {
     
@@ -8,13 +11,9 @@ class Profile extends Component {
 
         return(
             <div className="profile">
-                Preferences (default # of guests)
-                <br/>
-                Diet
-                <br/>
-                Log out
-                <br/>
-                Previous plans
+                <Logout/>
+                <UserPreferences/>
+                <PreviousMealplans/>
             </div>
             )
         }
