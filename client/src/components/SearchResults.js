@@ -8,30 +8,33 @@ class SearchResults extends Component {
     constructor(props){
         super(props)
         this.state={
-            results: ["result 1", "result 2", "result 3"]
+            results: []
         }
     }
 
     renderResults(){
-        return(
-            this.state.results.map((result, key)=>{
-                return(
-                    <React.Fragment>
-                        <Link to={`/recipe/${result}`}>{result}</Link>
-                        <br/>
-                    </React.Fragment>
-                )
-            })
-        )
+        if(this.state.results[0] !== undefined){
+            return(
+                <div className="searchResults">
+                    {this.state.results.map((result, key)=>{
+                        return(
+                            <React.Fragment>
+                                <Link to={`/recipe/${result}`}>{result}</Link>
+                                <br/>
+                            </React.Fragment>
+                        )
+                    })}
+                </div>
+            )
+        }
     }
 
     render() {
 
         return(
-            <div className="searchResults">
+            <React.Fragment>
                 {this.renderResults()}
-                {/* <Route path={`/recipe/:recipeName`} component={Recipe}/> */}
-            </div>
+            </React.Fragment>
             )
         }
 
