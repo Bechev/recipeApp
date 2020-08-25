@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {Accordion, Card} from 'react-bootstrap';
+import MealViewer from './MealViewer.js'
 
 
 class MealPlanFilters extends Component {
@@ -9,7 +10,6 @@ class MealPlanFilters extends Component {
         super(props)
         this.state={
             daysList: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Friday"],
-            mealList: [],
         }
         this.renderDays = this.renderDays.bind(this)
     }
@@ -24,7 +24,9 @@ class MealPlanFilters extends Component {
                             {day}
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={key+1}>
-                            <Card.Body>meals</Card.Body>
+                            <Card.Body>
+                                <MealViewer/>
+                            </Card.Body>
                         </Accordion.Collapse>
                     </Card>
                 )

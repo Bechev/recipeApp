@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter, Link, Route} from 'react-router-dom';
-import Recipe from '../scenes/Recipe.js'
+import {withRouter, Link} from 'react-router-dom';
 import './SearchResults.css'
 
 class SearchResults extends Component {
