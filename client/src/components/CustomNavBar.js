@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, Form, FormControl} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import SearchResults from './SearchResults.js'
 import './CustomNavBar.css'
 
 class CustomNavBar extends Component {
@@ -13,6 +14,7 @@ class CustomNavBar extends Component {
                     <Navbar.Brand href="/">Simmering</Navbar.Brand>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="searchBar" />
+                        <SearchResults/>
                     </Form>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -23,8 +25,8 @@ class CustomNavBar extends Component {
                         <Nav.Link href="/profile">Profile</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
-                    
                 </Navbar>
+                
             </div>
             )
         }

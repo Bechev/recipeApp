@@ -25,7 +25,7 @@ function App() {
                 <Route exact path='/signup' component={Signup}/>
                 <Route exact path='/suggest a recipe' component={SuggestRecipe}/>
                 <Route exact path='/mealplan' component={MealPlan}/>
-                <Route exact path='/recipe' component={Recipe}/>
+                <Route path={`/recipe/:recipeName`} component={Recipe}/>
                 <Route exact path='/shopping bag' component={Bag}/>
                 <Route exact path='/browse' component={Browse}/>
                 <Route exact path='/profile' component={Profile}/>

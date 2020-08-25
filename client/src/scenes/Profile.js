@@ -9,8 +9,12 @@ class Profile extends Component {
         return(
             <div className="profile">
                 Preferences (default # of guests)
+                <br/>
                 Diet
+                <br/>
                 Log out
+                <br/>
+                Previous plans
             </div>
             )
         }

@@ -34,6 +34,7 @@ class GroceriesList extends Component {
 
         return(
             <div className="groceriesList">
+                <h3>Groceries List</h3>
                 {this.renderGroceriesList()}
             </div>
             )
