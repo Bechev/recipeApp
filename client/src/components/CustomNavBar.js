@@ -6,6 +6,34 @@ import './CustomNavBar.css'
 
 class CustomNavBar extends Component {
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        query: ''
+        // results: []
+      };
+      this.handleChange = this.handleChange.bind(this);
+    }
+
+
+    handleChange(event) {
+      this.setState({query: event.target.value})
+    //   console.log(this.state.query)
+    }
+
+    // handleChange(event) {
+    //   this.setState({query: event.target.value}, () => {
+    //     if(this.state.query && this.state.query.length >= 1){
+    //         console.log(this.state.query)
+    //     //   this.getResults()
+    //     } else if (!this.state.query){
+    //       this.setState({
+    //         results: []               
+    //       })
+    //     }
+    //   })
+    // }
+
     render() {
 
         return(
@@ -13,8 +41,8 @@ class CustomNavBar extends Component {
                 <Navbar expanded={false} bg="light" expand="lg">
                     <Navbar.Brand href="/">Simmering</Navbar.Brand>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="searchBar" />
-                        <SearchResults/>
+                        <FormControl type="text" placeholder="Search" className="searchBar" onChange={this.handleChange}/>
+                        <SearchResults query={this.state.query}/>
                     </Form>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

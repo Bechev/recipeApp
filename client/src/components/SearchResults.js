@@ -10,16 +10,29 @@ class SearchResults extends Component {
         this.state={
             results: []
         }
+        this.resetState = this.resetState.bind(this)
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.query !== this.props.query){
+            this.setState({results: [this.props.query]})
+            console.log("props:" + this.props.query)
+            console.log("state:" + this.state.results[0])
+        }
+    }
+
+    resetState(){
+        this.setState({results: []})
     }
 
     renderResults(){
-        if(this.state.results[0] !== undefined){
+        if(this.state.results[0]){
             return(
                 <div className="searchResults">
                     {this.state.results.map((result, key)=>{
                         return(
                             <React.Fragment>
-                                <Link to={`/recipe/${result}`}>{result}</Link>
+                                <Link to={`/recipe/${result}`} onClick={this.resetState}>{result}</Link>
                                 <br/>
                             </React.Fragment>
                         )
