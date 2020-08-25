@@ -38,7 +38,7 @@ class CustomNavBar extends Component {
 
         return(
             <div className="customNavBar">
-                <Navbar expanded={false} bg="light" expand="lg">
+                <Navbar bg="light" expand="lg">
                     <Navbar.Brand href="/">Simmering</Navbar.Brand>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="searchBar" onChange={this.handleChange}/>
