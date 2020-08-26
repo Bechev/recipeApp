@@ -49,7 +49,6 @@ export function verify_credentials(){
         })
         .then(response => response.json())
         .then(response=>{
-            console.log(response)
             dispatch({type: "CREDENTIAL_VERIFICATION_SUCCESS", payload: response.data})
         })  
         .catch(error=>{
