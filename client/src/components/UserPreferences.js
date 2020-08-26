@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import '../transversal CSS/button.css'
+
 
 class UserPreferences extends Component {
     
@@ -34,29 +36,30 @@ class UserPreferences extends Component {
 
                     <Form.Group controlId="formGridState">
                         <Form.Label>Prefered first day of the week</Form.Label>
-                        <Form.Control as="select" defaultValue="Choose...">
+                        <Form.Control as="select" defaultValue="Monday">
                             {this.renderDaysOptions()}
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicCheckbox">
                         <br/>
                         <div>Diet Restrictions</div>
                         {/* <br/> */}
+                    <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Gluten free" />
                         <Form.Check type="checkbox" label="Lactose intolerant" />
                         <Form.Check type="checkbox" label="Vegetarian" />
                         <Form.Check type="checkbox" label="Vegan" />
-                        
+                    </Form.Group>
                         <br/>
                         <div>Allergies</div>
                         {/* <br/> */}
+                    <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Nuts" />
                         <Form.Check type="checkbox" label="Eggs" />
                         <Form.Check type="checkbox" label="Lactose" />
-                        
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+
+                    <Button className="button" variant="primary" type="submit">
                         Save
                     </Button>
                 </Form>

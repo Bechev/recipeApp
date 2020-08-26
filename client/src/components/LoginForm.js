@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import '../transversal CSS/button.css'
 
 class LoginForm extends Component {
 
@@ -45,7 +46,7 @@ class LoginForm extends Component {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button className="button" variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

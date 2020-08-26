@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
+import '../transversal CSS/button.css'
 
 class Logout extends Component {
     
@@ -9,7 +10,7 @@ class Logout extends Component {
 
         return(
             <div className="logout">
-                <Button>Logout</Button>
+                <Button className="button">Logout</Button>
             </div>
             )
         }

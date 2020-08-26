@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import '../transversal CSS/button.css'
+
 
 class SignupForm extends Component {
 
@@ -70,7 +72,7 @@ class SignupForm extends Component {
                         </Form.Text>
 
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button className="button" variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

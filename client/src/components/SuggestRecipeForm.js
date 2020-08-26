@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button, Col} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import './SuggestRecipeForm.css'
+import '../transversal CSS/button.css'
 
 class SuggestRecipeForm extends Component {
 
@@ -69,7 +70,7 @@ class SuggestRecipeForm extends Component {
                             <Form.Control type="text" required/>
                         </Form.Group>
                         <Form.Group as={Col} className="removeGroup">
-                            {i === (this.state.numberOfIngredients - 1) && (this.state.numberOfIngredients > 1) ? <Button variant="secondary" className='removeIngredientButton' onClick={this.removeIngredientField}>-</Button> : null}
+                            {i === (this.state.numberOfIngredients - 1) && (this.state.numberOfIngredients > 1) ? <Button className="button" variant="secondary" className='removeIngredientButton' onClick={this.removeIngredientField}>-</Button> : null}
                         </Form.Group>
                     </Form.Row>
                 </React.Fragment>
@@ -135,7 +136,7 @@ class SuggestRecipeForm extends Component {
                     </Form.Row>
                     <br/>
                     <Form.Row>
-                        <Button variant="primary" type="submit">
+                        <Button className="button" variant="primary" type="submit">
                             Submit
                         </Button>
                     </Form.Row>

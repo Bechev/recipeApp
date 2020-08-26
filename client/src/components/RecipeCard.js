@@ -3,6 +3,8 @@ import {Card, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import image_placeholder from '../Assets/image_placeholder.jpg'
 import './RecipeCard.css'
+import '../transversal CSS/button.css'
+
 
 class RecipeCard extends Component {
     
@@ -19,7 +21,7 @@ class RecipeCard extends Component {
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button className="button" variant="primary">Go somewhere</Button>
                     </Card.Body>
                 </Card>
             </div>
