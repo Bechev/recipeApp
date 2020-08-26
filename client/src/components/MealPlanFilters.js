@@ -19,7 +19,7 @@ class MealPlanFilters extends Component {
         return(
             this.state.daysList.map((day, key) =>{
                 return(
-                    <Card>
+                    <Card key={key}>
                         <Accordion.Toggle  as={Card.Header} eventKey={key+1}>
                             {day}
                         </Accordion.Toggle>

@@ -20,7 +20,7 @@ class MealViewer extends Component {
         return(
             meal.recipes.map((recipe, key) =>{
                 return(
-                    <RecipeCard/>
+                    <RecipeCard key={key}/>
                 )
             })
         )
@@ -30,7 +30,7 @@ class MealViewer extends Component {
         return(
             this.state.mealList.map((meal, key) =>{
                 return(
-                    <Card className="meal">
+                    <Card key={key} className="meal">
                         <h3>{meal.name}</h3>
                         <div className="mealRecipes">
                             {this.renderMealRecipes(meal)}
