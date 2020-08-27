@@ -1,4 +1,4 @@
-export function sign_in(email, password, history){
+export function login(email, password){
     return (dispatch) => {
         dispatch({ type: 'SIGNING_IN_USER' });    
         return fetch("http://localhost:3000/api/v1/auth/sign_in" ,{
@@ -15,18 +15,13 @@ export function sign_in(email, password, history){
         })
         .then(response => { 
             const user = {};
-            console.log("response.headers" + response.headers)
             response.headers.forEach((value, name) => user[name] = value);
             localStorage.setItem('user', JSON.stringify(user));
             return response.json()
         })
         .then(response =>{
-            if(!response){ 
-                throw new Error("no reponse")
-            }else{
-                dispatch({type:'SIGN_IN_USER_SUCCESS', payload: response.data })
-                history.push('/')
-            }
+            if(response.success ===  false) throw new Error(response.errors)
+            else dispatch({type:'SIGN_IN_USER_SUCCESS', payload: response.data })
         })
         .catch(error =>{
             dispatch({type:'SIGN_IN_USER_FAILURE', payload: error, error:true})
@@ -49,7 +44,8 @@ export function verify_credentials(){
         })
         .then(response => response.json())
         .then(response=>{
-            dispatch({type: "CREDENTIAL_VERIFICATION_SUCCESS", payload: response.data})
+            if(!response.success) throw new Error(response.errors)
+            else dispatch({type: "CREDENTIAL_VERIFICATION_SUCCESS", payload: response.data})
         })  
         .catch(error=>{
             dispatch({type:'CREDENTIAL_VERIFICATION_FAILURE', payload: error, error:true})
@@ -57,7 +53,7 @@ export function verify_credentials(){
     })
 }
 
-export function sign_out(){
+export function logout(){
     return(dispatch=>{
         let user = localStorage.getItem('user')
         user = JSON.parse(user)
@@ -72,17 +68,17 @@ export function sign_out(){
         })
         .then(response => response.json())
         .then(response=>{
-            if(!response.ok) throw new Error(response.status)
-            else dispatch({type: "SIGN_OUT_USER_SUCCESS", payload: response})
+            if(!response.success) throw new Error(response.errors)
+            dispatch({type: "SIGN_OUT_USER_SUCCESS", payload: response})
+            console.log(response)
         })
         .catch(error=>{
-            console.log(error)
-        dispatch({type:'SIGN_OUT_USER_FAILURE', payload: error, error:true})
+            dispatch({type:'SIGN_OUT_USER_FAILURE', payload: error, error:true})
         })
     })
 }
 
-export function sign_up( email, username, password, password_confirmation, state,history){
+export function signup( email, password, password_confirmation, state){
     return (dispatch) => {
         dispatch({ type: 'SIGNING_UP_USER' });    
         return fetch("http://localhost:3000/api/v1/auth/" ,{
@@ -94,7 +90,6 @@ export function sign_up( email, username, password, password_confirmation, state
             },
             body: JSON.stringify({
                 email: email,
-                username: username,
                 password: password,
                 password_confirmation: password_confirmation,
                 state: state
@@ -107,14 +102,8 @@ export function sign_up( email, username, password, password_confirmation, state
             return response.json()
         })
         .then(response => { 
-            if(!response){ 
-                // alert(reponse.message)
-                throw new Error("Oops, something went wrong")
-            }
-            else {
-                dispatch({type:'SIGN_UP_USER_SUCCESS', payload: response.data })
-                window.location.reload(false);
-            }
+            if(response.status === 'error') throw new Error(response.errors)
+            else dispatch({type:'SIGN_UP_USER_SUCCESS', payload: response.data })
         })
         .catch(error =>{
             dispatch({type:'SIGN_UP_USER_FAILURE', payload: error, error:true})

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
  
 class User < ActiveRecord::Base 
-extend Devise::Models
+    extend Devise::Models
+    include DeviseTokenAuth::Concerns::User
     after_save :create_user_mealplan
     has_many :posts
     has_many :comments
@@ -18,7 +19,7 @@ extend Devise::Models
     devise :database_authenticatable, :registerable,
             :recoverable, :rememberable, :trackable, :validatable
     
-    include DeviseTokenAuth::Concerns::User
+    
 
     def create_user_mealplan
         if self.mealplans.length === 0

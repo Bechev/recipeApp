@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
+import {signup } from '../services/actions/auth.js'
 import '../transversal CSS/button.css'
 
 
@@ -14,14 +16,20 @@ class SignupForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit(event){
+    
+       handleSubmit(event){
         const form = event.currentTarget;
-        console.log(event.currentTarget.formBasicEmail.value)
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } 
+        this.props.signup(event.currentTarget.formBasicEmail.value, 
+                         event.currentTarget.formBasicPassword.value,
+                         event.currentTarget.formBasicPasswordConfirmation.value,
+                         event.currentTarget.formBasicState.value)
         this.setState({validated: true})
+        event.preventDefault();
+        event.stopPropagation();
     };
 
 
@@ -35,7 +43,7 @@ class SignupForm extends Component {
             })
         )
     }
-    
+
 
     render() {
 
@@ -59,6 +67,14 @@ class SignupForm extends Component {
                         </Form.Control.Feedback>
                     </Form.Group>
 
+                    <Form.Group controlId="formBasicPasswordConfirmation">
+                        <Form.Label>Password Confirmation</Form.Label>
+                        <Form.Control type="password" placeholder="Password Confirmation" required/>
+                        <Form.Control.Feedback type="invalid">
+                            Please confirm your password
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
                     <Form.Group controlId="formBasicState">
                         <Form.Label>State</Form.Label>
                         <Form.Control as="select" required>
@@ -70,8 +86,8 @@ class SignupForm extends Component {
                         <Form.Text className="text-muted">
                             We collect your state to suggest local and seasonal ingredients
                         </Form.Text>
-
                     </Form.Group>
+
                     <Button className="button" variant="primary" type="submit">
                         Submit
                     </Button>
@@ -82,4 +98,18 @@ class SignupForm extends Component {
 
 }
 
-  export default withRouter(SignupForm);
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        signup: (email, password, passwordConfirmation, state) => dispatch(signup(email, password, passwordConfirmation, state)),
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupForm));

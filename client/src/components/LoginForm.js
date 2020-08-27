@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
+import {login } from '../services/actions/auth.js'
 import '../transversal CSS/button.css'
 
 class LoginForm extends Component {
@@ -15,12 +17,14 @@ class LoginForm extends Component {
 
     handleSubmit(event){
         const form = event.currentTarget;
-        console.log(event.currentTarget.formBasicEmail.value)
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } 
+        this.props.login(event.currentTarget.formBasicEmail.value, event.currentTarget.formBasicPassword.value)
         this.setState({validated: true})
+        event.preventDefault();
+        event.stopPropagation();
     };
     
 
@@ -56,4 +60,17 @@ class LoginForm extends Component {
 
 }
 
-  export default withRouter(LoginForm);
+const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (email, password) => dispatch(login(email, password)),
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

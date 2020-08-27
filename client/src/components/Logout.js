@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
+import {logout } from '../services/actions/auth.js'
 import Button from 'react-bootstrap/Button'
 import '../transversal CSS/button.css'
 
@@ -10,11 +12,23 @@ class Logout extends Component {
 
         return(
             <div className="logout">
-                <Button className="button">Logout</Button>
+                <Button className="button" onClick={()=>{this.props.logout(this.props.user)}}>Logout</Button>
             </div>
             )
         }
 
 }
 
-  export default withRouter(Logout);
+const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout()),
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Logout));
