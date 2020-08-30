@@ -22,6 +22,7 @@ export function searchRecipes(query){
             let resultsArr = []
             response.map((recipe, key)=>{
                 resultsArr.push(recipe.name)
+                return resultsArr
             })
             dispatch({type:'LOAD_RESULTS_SUCCESS', payload: resultsArr})
         })
