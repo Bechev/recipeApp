@@ -54,9 +54,15 @@ class UserPreferences extends Component {
                         <div>Allergies</div>
                         {/* <br/> */}
                     <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Nuts" />
+                        <Form.Check type="checkbox" label="Milk" />
                         <Form.Check type="checkbox" label="Eggs" />
+                        <Form.Check type="checkbox" label="Soy" />
+                        <Form.Check type="checkbox" label="Wheat" />
                         <Form.Check type="checkbox" label="Lactose" />
+                        <Form.Check type="checkbox" label="Peanut" />
+                        <Form.Check type="checkbox" label="Tree Nuts" />
+                        <Form.Check type="checkbox" label="Fish" />
+                        <Form.Check type="checkbox" label="Shellfish" />
                     </Form.Group>
 
                     <Button className="button" variant="primary" type="submit">
