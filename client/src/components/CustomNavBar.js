@@ -10,29 +10,31 @@ class CustomNavBar extends Component {
       super(props);
       this.state = {
         query: ''
-        // results: []
       };
       this.handleChange = this.handleChange.bind(this);
+      this.resetQuery = this.resetQuery.bind(this);
+    }
+
+    componentDidMount(){
+      document.addEventListener("keydown", this.resetQuery, false);
+      document.addEventListener("click", this.resetQuery, false);
+    }
+
+    componentWillUnmount(){
+      document.removeEventListener("keydown", this.resetQuery, false);
+      document.removeEventListener("click", this.resetQuery, false);
     }
 
 
     handleChange(event) {
       this.setState({query: event.target.value})
-    //   console.log(this.state.query)
     }
 
-    // handleChange(event) {
-    //   this.setState({query: event.target.value}, () => {
-    //     if(this.state.query && this.state.query.length >= 1){
-    //         console.log(this.state.query)
-    //     //   this.getResults()
-    //     } else if (!this.state.query){
-    //       this.setState({
-    //         results: []               
-    //       })
-    //     }
-    //   })
-    // }
+    resetQuery = (event) => {
+        if(event.keyCode === 27 || event.type==='click'){
+            this.setState({query: ''})
+        }
+    }
 
     render() {
 

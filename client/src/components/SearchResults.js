@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import { connect } from 'react-redux'
 import './SearchResults.css'
 
 class SearchResults extends Component {
@@ -11,13 +12,45 @@ class SearchResults extends Component {
         }
         this.resetState = this.resetState.bind(this)
     }
+    
 
     componentDidUpdate(prevProps){
         if(prevProps.query !== this.props.query){
-            this.setState({results: [this.props.query]})
-            console.log("props:" + this.props.query)
-            console.log("state:" + this.state.results[0])
+            if(this.props.query && this.props.query.length >= 1){
+                this.getResults()
+            } else if (!this.props.query){
+                this.setState({
+                    results: []               
+                })
+            }
         }
+    }
+
+    getResults() {
+        fetch("http://localhost:3000/api/v1/search",{
+            method: "POST",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "uid": this.props.user.uid,
+                "client":  this.props.user.client,
+                "access-token":  this.props.user['access-token'],
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+                char: this.props.query
+            })
+        })
+        .then(response => response.json())
+        .then(response => { 
+            let resultsArr = []
+            response.map((recipe, key)=>{
+                resultsArr.push(recipe.name)
+            })
+            this.setState({
+                results: resultsArr
+            })
+        })
     }
 
     resetState(){
@@ -52,4 +85,17 @@ class SearchResults extends Component {
 
 }
 
-  export default withRouter(SearchResults);
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         verify_credentials: (user) => dispatch(verify_credentials(user)),
+//     }
+// }
+
+export default withRouter(connect(mapStateToProps, null)(SearchResults));
