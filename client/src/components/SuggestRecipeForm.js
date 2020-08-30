@@ -70,7 +70,7 @@ class SuggestRecipeForm extends Component {
                             <Form.Control type="text" required/>
                         </Form.Group>
                         <Form.Group as={Col} className="removeGroup">
-                            {i === (this.state.numberOfIngredients - 1) && (this.state.numberOfIngredients > 1) ? <Button className="button" variant="secondary" className='removeIngredientButton' onClick={this.removeIngredientField}>-</Button> : null}
+                            {i === (this.state.numberOfIngredients - 1) && (this.state.numberOfIngredients > 1) ? <Button className="button removeIngredientButton" variant="secondary" onClick={this.removeIngredientField}>-</Button> : null}
                         </Form.Group>
                     </Form.Row>
                 </React.Fragment>
