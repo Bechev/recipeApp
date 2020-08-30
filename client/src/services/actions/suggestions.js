@@ -21,5 +21,5 @@ export function fetchSuggestions(){
         .catch(error =>{
             dispatch({type:'LOAD_SUGGESTIONS_FAILURE', payload: error, error:true})
         })
-    }    
+    }
 };

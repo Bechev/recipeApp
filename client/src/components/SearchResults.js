@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import {searchRecipes} from '../services/actions/searchRecipes.js'
 import { connect } from 'react-redux'
 import './SearchResults.css'
 
@@ -17,7 +18,8 @@ class SearchResults extends Component {
     componentDidUpdate(prevProps){
         if(prevProps.query !== this.props.query){
             if(this.props.query && this.props.query.length >= 1){
-                this.getResults()
+                this.props.searchRecipes(this.props.query)
+                this.setState({results: this.props.results})
             } else if (!this.props.query){
                 this.setState({
                     results: []               
@@ -26,32 +28,7 @@ class SearchResults extends Component {
         }
     }
 
-    getResults() {
-        fetch("http://localhost:3000/api/v1/search",{
-            method: "POST",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "uid": this.props.user.uid,
-                "client":  this.props.user.client,
-                "access-token":  this.props.user['access-token'],
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify({
-                char: this.props.query
-            })
-        })
-        .then(response => response.json())
-        .then(response => { 
-            let resultsArr = []
-            response.map((recipe, key)=>{
-                resultsArr.push(recipe.name)
-            })
-            this.setState({
-                results: resultsArr
-            })
-        })
-    }
+   
 
     resetState(){
         this.setState({results: []})
@@ -88,14 +65,15 @@ class SearchResults extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.auth.user
+      user: state.auth.user,
+      results: state.searchResults.searchResults
     }
   }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         verify_credentials: (user) => dispatch(verify_credentials(user)),
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        searchRecipes: (query) => dispatch(searchRecipes(query)),
+    }
+}
 
-export default withRouter(connect(mapStateToProps, null)(SearchResults));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResults));

@@ -8,6 +8,7 @@ import groceriesListReducer from './groceriesListReducer.js'
 import userIngredientsReducer from './userIngredientsReducer.js'
 import userReducer from './userReducer.js'
 import suggestionsReducer from './suggestionsReducer.js'
+import searchRecipesReducer from './searchRecipesReducer.js'
 
 
 export default combineReducers({
@@ -20,5 +21,6 @@ export default combineReducers({
     suggestions: suggestionsReducer,
     groceriesList: groceriesListReducer,
     userIngredients: userIngredientsReducer,
+    searchResults: searchRecipesReducer
   })
   
