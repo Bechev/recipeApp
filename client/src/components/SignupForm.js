@@ -26,7 +26,8 @@ class SignupForm extends Component {
         this.props.signup(event.currentTarget.formBasicEmail.value, 
                          event.currentTarget.formBasicPassword.value,
                          event.currentTarget.formBasicPasswordConfirmation.value,
-                         event.currentTarget.formBasicState.value)
+                         event.currentTarget.formBasicState.value,
+                         this.props.history)
         this.setState({validated: true})
         event.preventDefault();
         event.stopPropagation();
@@ -107,7 +108,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        signup: (email, password, passwordConfirmation, state) => dispatch(signup(email, password, passwordConfirmation, state)),
+        signup: (email, password, passwordConfirmation, state, history) => dispatch(signup(email, password, passwordConfirmation, state, history)),
     }
 }
 

@@ -12,7 +12,7 @@ class Logout extends Component {
 
         return(
             <div className="logout">
-                <Button className="button" onClick={()=>{this.props.logout(this.props.user)}}>Logout</Button>
+                <Button className="button" onClick={()=>{this.props.logout(this.props.history)}}>Logout</Button>
             </div>
             )
         }
@@ -27,7 +27,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(logout()),
+        logout: (history) => dispatch(logout(history)),
     }
 }
 

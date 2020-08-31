@@ -21,7 +21,7 @@ class resetPasswordForm extends Component {
             event.preventDefault();
             event.stopPropagation();
         } 
-        this.props.resetPassword(event.currentTarget.formBasicPassword.value, event.currentTarget.formBasicPasswordConfirmation.value)
+        this.props.resetPassword(event.currentTarget.formBasicPassword.value, event.currentTarget.formBasicPasswordConfirmation.value, this.props.history)
         this.setState({validated: true})
         event.preventDefault();
         event.stopPropagation();
@@ -68,7 +68,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        resetPassword: (password, password_confirmation) => dispatch(resetPassword(password, password_confirmation)),
+        resetPassword: (password, password_confirmation, history) => dispatch(resetPassword(password, password_confirmation, history)),
     }
 }
 

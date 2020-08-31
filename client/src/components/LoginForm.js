@@ -21,7 +21,7 @@ class LoginForm extends Component {
             event.preventDefault();
             event.stopPropagation();
         } 
-        this.props.login(event.currentTarget.formBasicEmail.value, event.currentTarget.formBasicPassword.value)
+        this.props.login(event.currentTarget.formBasicEmail.value, event.currentTarget.formBasicPassword.value, this.props.history)
         this.setState({validated: true})
         event.preventDefault();
         event.stopPropagation();
@@ -68,7 +68,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (email, password) => dispatch(login(email, password)),
+        login: (email, password, history) => dispatch(login(email, password, history)),
     }
 }
 

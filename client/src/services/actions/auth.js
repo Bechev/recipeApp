@@ -1,4 +1,4 @@
-export function login(email, password){
+export function login(email, password, history){
     return (dispatch) => {
         dispatch({ type: 'SIGNING_IN_USER' });    
         return fetch("http://localhost:3000/api/v1/auth/sign_in" ,{
@@ -21,7 +21,10 @@ export function login(email, password){
         })
         .then(response =>{
             if(response.success ===  false) throw new Error(response.errors)
-            else dispatch({type:'SIGN_IN_USER_SUCCESS', payload: response.data })
+            else {
+                dispatch({type:'SIGN_IN_USER_SUCCESS', payload: response.data });
+                history.push('/')
+            }
         })
         .catch(error =>{
             dispatch({type:'SIGN_IN_USER_FAILURE', payload: error, error:true})
@@ -53,7 +56,7 @@ export function verify_credentials(){
     })
 }
 
-export function logout(){
+export function logout(history){
     return(dispatch=>{
         let user = localStorage.getItem('user')
         user = JSON.parse(user)
@@ -69,8 +72,10 @@ export function logout(){
         .then(response => response.json())
         .then(response=>{
             if(!response.success) throw new Error(response.errors)
-            dispatch({type: "SIGN_OUT_USER_SUCCESS", payload: response})
-            console.log(response)
+            else {
+                dispatch({type: "SIGN_OUT_USER_SUCCESS", payload: response});
+                history.push('/')
+            }
         })
         .catch(error=>{
             dispatch({type:'SIGN_OUT_USER_FAILURE', payload: error, error:true})
@@ -78,7 +83,7 @@ export function logout(){
     })
 }
 
-export function signup( email, password, password_confirmation, state){
+export function signup( email, password, password_confirmation, state, history){
     return (dispatch) => {
         dispatch({ type: 'SIGNING_UP_USER' });    
         return fetch("http://localhost:3000/api/v1/auth/" ,{
@@ -103,7 +108,10 @@ export function signup( email, password, password_confirmation, state){
         })
         .then(response => { 
             if(response.status === 'error') throw new Error(response.errors)
-            else dispatch({type:'SIGN_UP_USER_SUCCESS', payload: response.data })
+            else {
+                dispatch({type:'SIGN_UP_USER_SUCCESS', payload: response.data });
+                history.push('/')
+            }
         })
         .catch(error =>{
             dispatch({type:'SIGN_UP_USER_FAILURE', payload: error, error:true})
@@ -140,7 +148,7 @@ export function requestPasswordReset(email){
 };
 
 
-export function resetPassword( password, password_confirmation){
+export function resetPassword( password, password_confirmation, history){
     return (dispatch) => {
         let user = localStorage.getItem('user')
         user = JSON.parse(user)
@@ -165,7 +173,10 @@ export function resetPassword( password, password_confirmation){
         })
         .then(response => { 
             if(response.status === 'error') throw new Error(response.errors)
-            else dispatch({type:'RESETING_USER_PASSWORD_SUCCESS', payload: response })
+            else {
+                dispatch({type:'RESETING_USER_PASSWORD_SUCCESS', payload: response });
+                history.push('/')
+            }
         })
         .catch(error =>{
             dispatch({type:'RESETING_USER_PASSWORD_FAILURE', payload: error, error:true})
