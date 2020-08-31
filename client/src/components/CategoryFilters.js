@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Accordion, Card, Form, Button, ButtonGroup} from 'react-bootstrap';
+import {addFilter, removeFilter, resetFilter} from '../services/actions/searchRecipes.js'
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
 import './CategoryFilters.css'
 
 
@@ -13,12 +15,22 @@ class CategoryFilters extends Component {
         }
     }
 
+    changeFilter(filter){
+        if(this.props.filters.includes(filter)){
+            this.props.removeFilter(filter)
+        }else if(filter==='rest'){
+            this.props.resetFilter()
+        }else{
+            this.props.addFilter(filter)
+        }
+    }
+
     renderPromotedCategories(){
         return(
             <ButtonGroup className='promotedCategories' aria-label="Basic example">
                 {this.state.promotedCategories.map((category, key) =>{
                     return(
-                            <Button variant="secondary">{category}</Button>
+                            <Button variant="secondary" onClick={()=>this.changeFilter(category)}>{category}</Button>
                     )
                 })}
             </ButtonGroup>
@@ -71,4 +83,19 @@ class CategoryFilters extends Component {
 
 }
 
-  export default withRouter(CategoryFilters);
+const mapStateToProps = (state, ownProps) => {
+    return {
+      filters: state.searchResults.filters
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addFilter: (filter) => dispatch(addFilter(filter)),
+        removeFilter: (filter) => dispatch(removeFilter(filter)),
+        resetFilter: () => dispatch(resetFilter()),
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryFilters));

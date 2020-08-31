@@ -2,6 +2,8 @@ export default function suggestionsReducer(state = {
     isLoaded: false,
     errorMessage: '',
     searchResults: [],
+    filters: []
+
     }, action) {
 
     switch (action.type) {
@@ -21,6 +23,24 @@ export default function suggestionsReducer(state = {
                 ...state,
                 isLoaded: true,
                 errorMessage: action.payload.message}
+
+        case 'ADD_FILTER':
+            return{
+                ...state,
+                filters: state.filters.concat(action.payload)
+            }
+
+        case 'REMOVE_FILTER':
+            return{
+                ...state,
+                filters: state.filters.filter(e => e !== action.payload)
+            }
+
+        case 'RESET_FILTER':
+            return{
+                ...state,
+                filters: []
+            }
 
         default:
             return state;
