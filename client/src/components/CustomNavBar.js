@@ -50,7 +50,7 @@ class CustomNavBar extends Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                         <Nav.Link href="/mealplan">Mealplan</Nav.Link>
-                        <Nav.Link href="/shopping bag">My Cart</Nav.Link>
+                        <Nav.Link href="/shopping_bag">My Cart</Nav.Link>
                         <Nav.Link href="/browse">Browse</Nav.Link>
                         <Nav.Link href="/profile">Profile</Nav.Link>
                         </Nav>

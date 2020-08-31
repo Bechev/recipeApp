@@ -110,3 +110,65 @@ export function signup( email, password, password_confirmation, state){
         })
     }    
 };
+
+export function requestPasswordReset(email){
+    return (dispatch) => {
+        dispatch({ type: 'REQUESTING_PASSWORD_RESET' });    
+        return fetch("http://localhost:3000/api/v1/auth/password" ,{
+            method: "POST",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+                email: email,
+                redirect_url: 'http://localhost:3002/reset_password'
+            })
+        })
+        .then(response => {
+            response.json()
+        })
+        .then(response => { 
+            if(response.status === 'error') throw new Error(response.errors)
+            else dispatch({type:'REQUESTING_PASSWORD_RESET_SUCCESS', payload: response.data })
+        })
+        .catch(error =>{
+            dispatch({type:'REQUESTING_PASSWORD_RESET_FAILURE', payload: error, error:true})
+        })
+    }    
+};
+
+
+export function resetPassword( password, password_confirmation){
+    return (dispatch) => {
+        let user = localStorage.getItem('user')
+        user = JSON.parse(user)
+        dispatch({ type: 'RESETING_USER_PASSWORD' });    
+        return fetch("http://localhost:3000/api/v1/auth/password" ,{
+            method: "PUT",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "uid": user['uid'],
+                "client":  user['client'],
+                "access-token":  user['access-token'],
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+                password: password,
+                password_confirmation: password_confirmation
+            })
+        })
+        .then(response => {
+            response.json()
+        })
+        .then(response => { 
+            if(response.status === 'error') throw new Error(response.errors)
+            else dispatch({type:'RESETING_USER_PASSWORD_SUCCESS', payload: response })
+        })
+        .catch(error =>{
+            dispatch({type:'RESETING_USER_PASSWORD_FAILURE', payload: error, error:true})
+        })
+    }    
+};

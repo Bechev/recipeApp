@@ -10,8 +10,8 @@ class Login extends Component {
 
         return(
             <div className="login">
-                <div className="loginWelcome">Test</div>
                 <LoginForm/>
+                <a href="/begin_reset_password">Forgot password?</a>
             </div>
             )
         }

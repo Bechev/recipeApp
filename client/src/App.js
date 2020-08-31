@@ -14,6 +14,8 @@ import Browse from './scenes/Browse.js';
 import Profile from './scenes/Profile.js';
 import NotFoundPage from './scenes/NotFoundPage.js';
 import Recipe from './scenes/Recipe.js';
+import ResetPassword from './scenes/ResetPassword.js';
+import RequestPasswordReset from './scenes/RequestPasswordReset.js'
 
 class App extends React.Component{
 
@@ -34,12 +36,14 @@ class App extends React.Component{
                   <Route exact path='/' component={Home}/>
                   <Route exact path='/login' component={Login}/>
                   <Route exact path='/signup' component={Signup}/>
-                  <Route exact path='/suggest a recipe' component={SuggestRecipe}/>
+                  <Route exact path='/suggest_a_recipe' component={SuggestRecipe}/>
                   <Route exact path='/mealplan' component={MealPlan}/>
                   <Route path={`/recipe/:recipeName`} component={Recipe}/>
-                  <Route exact path='/shopping bag' component={Bag}/>
+                  <Route exact path='/shopping_bag' component={Bag}/>
                   <Route exact path='/browse' component={Browse}/>
                   <Route exact path='/profile' component={Profile}/>
+                  <Route exact path='/begin_reset_password' component={RequestPasswordReset}/>
+                  <Route exact path='/reset_password' component={ResetPassword}/>
                   <Route path="/404" component={NotFoundPage} />
                   <Redirect to="/404" />
               </Switch>
