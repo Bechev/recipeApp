@@ -19,7 +19,7 @@ export default function authReducer(state = {
             return{
                 ...state,
                 isLoaded: true,
-                errorMessage: action.payload.message}
+                loginErrorMessage: action.payload.message}
 
         // Credential verification actions
         case 'CREDENTIAL_VERIFICATION':
@@ -53,7 +53,7 @@ export default function authReducer(state = {
             return{
                 ...state,
                 isLoaded: true,
-                errorMessage: action.payload.message}
+                signupErrorMessage: action.payload.message}
 
                 // Sign Up action
         case 'SIGNING_UP_USER':

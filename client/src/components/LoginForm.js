@@ -12,7 +12,7 @@ class LoginForm extends Component {
         this.state = {
             validated: false
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event){
@@ -22,9 +22,9 @@ class LoginForm extends Component {
             event.stopPropagation();
         } 
         this.props.login(event.currentTarget.formBasicEmail.value, event.currentTarget.formBasicPassword.value, this.props.history)
-        this.setState({validated: true})
         event.preventDefault();
         event.stopPropagation();
+        this.setState({validated: true})
     };
     
 
@@ -32,13 +32,12 @@ class LoginForm extends Component {
 
         return(
             <div className="login">
-                                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email"  placeholder="Enter email" required/>
-                        <Form.Control.Feedback>Looks good</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid email.
+                            Please provide a valid email
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -49,6 +48,10 @@ class LoginForm extends Component {
                             Please provide a password.
                         </Form.Control.Feedback>
                     </Form.Group>
+                    
+                    <div style={{color: "red"}}>
+                        {this.props.loginError}
+                    </div>
 
                     <Button className="button" variant="primary" type="submit">
                         Submit
@@ -62,7 +65,8 @@ class LoginForm extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.auth.user
+      user: state.auth.user,
+      loginError: state.auth.loginErrorMessage
     }
   }
 
