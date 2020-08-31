@@ -53,7 +53,7 @@ export default function authReducer(state = {
             return{
                 ...state,
                 isLoaded: true,
-                signupErrorMessage: action.payload.message}
+                logoutErrorMessage: action.payload.message}
 
                 // Sign Up action
         case 'SIGNING_UP_USER':
@@ -71,7 +71,7 @@ export default function authReducer(state = {
             return{
                 ...state,
                 isLoaded: true,
-                errorMessage: action.payload.message}
+                signupErrorMessage: action.payload.message}
         
         default:
             return state;

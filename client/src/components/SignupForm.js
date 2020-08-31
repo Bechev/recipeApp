@@ -11,7 +11,8 @@ class SignupForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            validated: false
+            validated: false,
+            passwordMismatch: false
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -23,6 +24,9 @@ class SignupForm extends Component {
             event.preventDefault();
             event.stopPropagation();
         } 
+        if(event.currentTarget.formBasicPassword.value !== event.currentTarget.formBasicPasswordConfirmation.value){
+            this.setState({passwordMismatch: true})
+        }
         this.props.signup(event.currentTarget.formBasicEmail.value, 
                          event.currentTarget.formBasicPassword.value,
                          event.currentTarget.formBasicPasswordConfirmation.value,
@@ -50,7 +54,7 @@ class SignupForm extends Component {
 
         return(
             <div className="signupForm">
-                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email"  placeholder="Enter email" required/>
@@ -89,6 +93,11 @@ class SignupForm extends Component {
                         </Form.Text>
                     </Form.Group>
 
+                    <div style={{color: "red"}}>
+                        {this.state.passwordMismatch ? "The passwords do not match" : this.props.signupError}
+                    </div>
+
+
                     <Button className="button" variant="primary" type="submit">
                         Submit
                     </Button>
@@ -102,7 +111,8 @@ class SignupForm extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.auth.user
+      user: state.auth.user,
+      signupError: state.auth.signupErrorMessage
     }
   }
 
