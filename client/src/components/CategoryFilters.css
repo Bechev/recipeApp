@@ -1,24 +1,4 @@
-.categoryFilters{
-    display: flex;
-    flex-direction: row;
+.promotedCategories{
+  width: 100%;
+  height: 8vh;
 }
-
-.categoryFilter{
-    width: 33%;
-}
-
-/* @media screen and (max-width: 900px) {
-    .AppContent{
-      margin-left: 20%;
-      margin-right: 20%;
-    }
-  }
-   */
-  @media screen and (max-width: 600px) {
-    .categoryFilters{
-        flex-direction: column;
-    }
-    .categoryFilter{
-        width: 100%;
-    }
-  }

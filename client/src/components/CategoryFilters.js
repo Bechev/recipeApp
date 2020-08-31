@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Accordion, Card, Form} from 'react-bootstrap';
+import {Accordion, Card, Form, Button, ButtonGroup} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import './CategoryFilters.css'
 
@@ -8,41 +8,53 @@ class CategoryFilters extends Component {
     constructor(props){
         super(props)
         this.state = {
-            promotedCategories: ['Favorites', 'Popular', 'New'],
-            favorites: ['test'],
-            popular: [],
-            new: []
+            filters: ['Category 1', 'Category 2', 'Category 3'],
+            promotedCategories: ['Popular', 'New', 'Favorites']
         }
     }
 
     renderPromotedCategories(){
         return(
-            this.state.promotedCategories.map((category, key) =>{
-                return(
-                    <Accordion className="categoryFilter" key={key} defaultActiveKey="0">
-                        <Card>
-                            <Accordion.Toggle as={Card.Header} eventKey="1">
-                                {category}
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey="1">
-                                {this.renderCategories(category.toLowerCase())}
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
-                )
-            })
+            <ButtonGroup className='promotedCategories' aria-label="Basic example">
+                {this.state.promotedCategories.map((category, key) =>{
+                    return(
+                            <Button variant="secondary">{category}</Button>
+                    )
+                })}
+            </ButtonGroup>
         )
     }
 
     renderCategories(categoryList){
         return(
             <Form>
-                {this.state[categoryList].map((category, key)=>{
+                {this.state.filters.map((category, key)=>{
                     return(
                         <Form.Check key={key} type='checkbox' id={category} label={category}/>
                     )
                 })}
             </Form>
+        )
+    }
+
+    renderFilters(){
+        return(
+            <Accordion className="filters" defaultActiveKey="0">
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="1">
+                        Filters
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="1">
+                        <Form>
+                            {this.state.filters.map((filter, key)=>{
+                                return(
+                                    <Form.Check key={key} type='checkbox' id={filter} label={filter}/>
+                                )
+                            })}
+                        </Form>
+                    </Accordion.Collapse>
+                </Card>
+            </Accordion>
         )
     }
     
@@ -52,6 +64,7 @@ class CategoryFilters extends Component {
         return(
             <div className="categoryFilters">
                 {this.renderPromotedCategories()}
+                {this.renderFilters()}
             </div>
         )
     }
