@@ -2,10 +2,21 @@ module Api
     module V1
         class CategoriesController < ApplicationController
             def index
-                @categories = Category.all
-                # @mealplans = user.mealplans.last(10).reverse
-                render json: @categories
+                
+                if params[:name] != nil
+                    filters = params[:name].split(',')
+                    @categoriesRecipes = []
+                    for filter in filters
+                        @categoriesRecipes = @categoriesRecipes.concat(Category.where(name: filter).first.recipes)
+                    end
+                else
+                    @categoriesRecipes = Category.all
+                end
+                print('//////////////////////////')
+                print(@categoriesRecipes.count())
+                render json: @categoriesRecipes
             end
+
         end
     end
 end

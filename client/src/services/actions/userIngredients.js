@@ -49,10 +49,3 @@ export function updateUserIngredients(ingredient_id){
         })
     }    
 };
-
-// export function checkOrUncheckIngredient(isChecked, ingredient){
-//     return { 
-//         type: 'CHECK_OR_UNCHECK_INGREDIENT',
-//         payload: ingredient,
-//     };
-// };
