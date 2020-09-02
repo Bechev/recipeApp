@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Accordion, Card, Form, Button, ButtonGroup} from 'react-bootstrap';
 import {addFilter, removeFilter, resetFilter} from '../services/actions/searchRecipes.js'
+import {fetch_categories} from '../services/actions/categories.js'
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux'
 import './CategoryFilters.css'
@@ -16,14 +17,28 @@ class CategoryFilters extends Component {
         this.changeFilter = this.changeFilter.bind(this)
     }
 
+    componentDidMount(){
+        this.props.fetch_categories()
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.categories !== this.props.categories){
+            let categoriesNames = [];
+            this.props.categories.map((category) => {
+                categoriesNames.push(category.name)
+            })
+            this.setState({filters: categoriesNames})
+        }
+    }
+
     changeFilter(filter){
-        console.log('triggered')
+        console.log(this.props.filters)
         if(this.props.filters.includes(filter)){
-            this.props.removeFilter(filter)
+            this.props.removeFilter(filter, this.props.filters)
         }else if(filter==='rest'){
             this.props.resetFilter()
         }else{
-            this.props.addFilter(filter)
+            this.props.addFilter(filter, this.props.filters)
         }
     }
 
@@ -75,14 +90,16 @@ class CategoryFilters extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      filters: state.searchResults.filters
+        categories: state.categories.categoriesList,
+        filters: state.searchResults.filters
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addFilter: (filter) => dispatch(addFilter(filter)),
-        removeFilter: (filter) => dispatch(removeFilter(filter)),
+        fetch_categories: () => dispatch(fetch_categories()),
+        addFilter: (filter, filters) => dispatch(addFilter(filter, filters)),
+        removeFilter: (filter, filters) => dispatch(removeFilter(filter, filters)),
         resetFilter: () => dispatch(resetFilter()),
     }
 }
