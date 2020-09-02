@@ -10,12 +10,14 @@ class CategoryFilters extends Component {
     constructor(props){
         super(props)
         this.state = {
-            filters: ['Category 1', 'Category 2', 'Category 3'],
+            filters: ['Category 1', 'Category 2', 'Category 3','Category 4', 'Category 5', 'Category 6','Category 7', 'Category 8', 'Category 9',],
             promotedCategories: ['Popular', 'New', 'Favorites']
         }
+        this.changeFilter = this.changeFilter.bind(this)
     }
 
     changeFilter(filter){
+        console.log('triggered')
         if(this.props.filters.includes(filter)){
             this.props.removeFilter(filter)
         }else if(filter==='rest'){
@@ -30,22 +32,10 @@ class CategoryFilters extends Component {
             <ButtonGroup className='promotedCategories' aria-label="Basic example">
                 {this.state.promotedCategories.map((category, key) =>{
                     return(
-                            <Button variant="secondary" onClick={()=>this.changeFilter(category)}>{category}</Button>
+                            <Button variant="secondary">{category}</Button>
                     )
                 })}
             </ButtonGroup>
-        )
-    }
-
-    renderCategories(categoryList){
-        return(
-            <Form>
-                {this.state.filters.map((category, key)=>{
-                    return(
-                        <Form.Check key={key} type='checkbox' id={category} label={category}/>
-                    )
-                })}
-            </Form>
         )
     }
 
@@ -57,10 +47,10 @@ class CategoryFilters extends Component {
                         Filters
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
-                        <Form>
+                        <Form className='checkboxFrom'>
                             {this.state.filters.map((filter, key)=>{
                                 return(
-                                    <Form.Check key={key} type='checkbox' id={filter} label={filter}/>
+                                    <Form.Check className='checkbox' key={key} type='checkbox' id={filter} label={filter} onChange={()=>this.changeFilter(filter)}/>
                                 )
                             })}
                         </Form>
