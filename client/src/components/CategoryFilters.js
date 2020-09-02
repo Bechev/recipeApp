@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Accordion, Card, Form, Button, ButtonGroup} from 'react-bootstrap';
-import {addFilter, removeFilter, resetFilter} from '../services/actions/searchRecipes.js'
-import {fetch_categories} from '../services/actions/categories.js'
+import {addFilter, removeFilter, resetFilter, fetch_categories} from '../services/actions/categories.js'
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux'
 import './CategoryFilters.css'
@@ -26,6 +25,7 @@ class CategoryFilters extends Component {
             let categoriesNames = [];
             this.props.categories.map((category) => {
                 categoriesNames.push(category.name)
+                return null
             })
             this.setState({filters: categoriesNames})
         }
@@ -91,7 +91,7 @@ class CategoryFilters extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         categories: state.categories.categoriesList,
-        filters: state.searchResults.filters
+        filters: state.categories.filters
     }
   }
 

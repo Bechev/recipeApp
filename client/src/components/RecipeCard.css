@@ -2,6 +2,19 @@
     width: 33.1%;
 }
 
+.card-body{
+    display: flex;
+    height: 25vh;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}
+
+.button{
+    align-self: flex-start;
+}
+
   @media screen and (max-width: 900px) {
     .recipeCard{
       width: 50%;

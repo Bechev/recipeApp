@@ -4,17 +4,24 @@ module Api
             def index
                 
                 if params[:name] != nil
+                    # debugger
                     filters = params[:name].split(',')
-                    @categoriesRecipes = []
-                    for filter in filters
-                        @categoriesRecipes = @categoriesRecipes.concat(Category.where(name: filter).first.recipes)
+                    @filteredRecipes = []
+                    if filters.length === 1
+                        @filteredRecipes = Category.where(name: filters.first).first.recipes
+                    else
+                        for filter in filters
+                            filteredRecipe = Category.where(name: filter).first.recipes
+                            @filteredRecipes = @filteredRecipes.concat(filteredRecipe)
+                        end
+                        @filteredRecipes = @filteredRecipes.select { |e| @filteredRecipes.count(e) > 1 }
+                        @filteredRecipes.uniq
                     end
+                    render json: @filteredRecipes
                 else
-                    @categoriesRecipes = Category.all
+                    @categories = Category.all
+                    render json: @categories
                 end
-                print('//////////////////////////')
-                print(@categoriesRecipes.count())
-                render json: @categoriesRecipes
             end
 
         end
