@@ -24,7 +24,7 @@ export function addFilter(filter, filters){
         const strUser = localStorage.getItem('user')
         let user = JSON.parse(strUser)
         let URLFilterString
-        if(filters=[]){
+        if(filters===[]){
             URLFilterString = filter
         }else{
             URLFilterString = filter + "," + filters.join (",")
