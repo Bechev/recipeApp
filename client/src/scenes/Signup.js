@@ -10,7 +10,8 @@ class Signup extends Component {
 
         return(
             <div className="signup">
-                <SignupForm/>    
+                <SignupForm/>   
+                <a href="/resend_confirmation_email">Resend confirmation email</a> 
             </div>
             )
         }

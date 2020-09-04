@@ -36,6 +36,7 @@ class App extends React.Component{
                   <Route exact path='/' component={Home}/>
                   <Route exact path='/login' component={Login}/>
                   <Route exact path='/signup' component={Signup}/>
+                  <Route exact path='/resend_confirmation_email' component={RequestPasswordReset}/>
                   <Route exact path='/suggest_a_recipe' component={SuggestRecipe}/>
                   <Route exact path='/mealplan' component={MealPlan}/>
                   <Route path={`/recipe/:recipeName`} component={Recipe}/>

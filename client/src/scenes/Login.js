@@ -12,7 +12,8 @@ class Login extends Component {
             <div className="login">
                 <LoginForm/>
                 <a href="/begin_reset_password">Forgot password?</a>
-                {console.log(this.props.history)}
+                <br/>
+                <a href="/resend_confirmation_email">Resend confirmation email</a>
             </div>
             )
         }

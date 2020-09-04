@@ -119,6 +119,34 @@ export function signup( email, password, password_confirmation, state, history){
     }    
 };
 
+export function resendConfirmationEmail(email){
+    return (dispatch) => {
+        dispatch({ type: 'RESENDING_CONFIRMATION_EMAIL' });    
+        return fetch("http://localhost:3000/api/v1/auth/confirmation" ,{
+            method: "POST",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+                email: email,
+                redirect_url: 'http://localhost:3002/'
+            })
+        })
+        .then(response => {
+            response.json()
+        })
+        .then(response => { 
+            if(response.status === 'error') throw new Error(response.errors)
+            else dispatch({type:'RESENDING_CONFIRMATION_EMAIL_SUCCESS', payload: response.data })
+        })
+        .catch(error =>{
+            dispatch({type:'RESENDING_CONFIRMATION_EMAIL_SUCCESS', payload: error, error:true})
+        })
+    }    
+};
+
 export function requestPasswordReset(email){
     return (dispatch) => {
         dispatch({ type: 'REQUESTING_PASSWORD_RESET' });    

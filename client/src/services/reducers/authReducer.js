@@ -21,6 +21,22 @@ export default function authReducer(state = {
                 isLoaded: true,
                 loginErrorMessage: action.payload.message}
 
+        case 'RESENDING_CONFIRMATION_EMAIL':
+            return  {
+                ...state,
+            }
+
+        case 'RESENDING_CONFIRMATION_EMAIL_SUCCESS':
+            return  {
+                isLoaded: true,
+                user: action.payload}
+
+        case 'RESENDING_CONFIRMATION_EMAIL_FAILURE':
+            return{
+                ...state,
+                isLoaded: true,
+                loginErrorMessage: action.payload.message}
+
         // Credential verification actions
         case 'CREDENTIAL_VERIFICATION':
             return  {
