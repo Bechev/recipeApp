@@ -35,7 +35,7 @@ class RequestPasswordResetForm extends Component {
                 <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
 
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Password confirmation</Form.Label>
+                        <Form.Label>Request password reset</Form.Label>
                         <Form.Control type="email" placeholder="email" required/>
                         <Form.Control.Feedback type="invalid">
                             Email invalid
