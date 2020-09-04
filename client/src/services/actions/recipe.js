@@ -1,7 +1,7 @@
-export function fetchRecipe(recipe_slug){
+export function fetchRecipe(recipe_name){
     return (dispatch) => {
         dispatch({ type: 'FETCH_RECIPE' });    
-        return fetch("http://localhost:3000/api/v1/recipes/" + recipe_slug ,{
+        return fetch("http://localhost:3000/api/v1/recipes/" + recipe_name ,{
             method: "GET",
             cache: "no-cache",
             credentials: "same-origin",

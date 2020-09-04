@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
 import Card from 'react-bootstrap/Card'
+import './RecipeInstructions.css'
 
 class RecipeInstructions extends Component {
     
     constructor(props){
         super(props)
         this.state={
-            instructions: ["instruction 1", "instruction 2", "instruction 3", "instruction 4", "instruction 5"]
+            instructions: [],
+            instructionsLoaded: false,
 
         }
         this.renderInstructions = this.renderInstructions.bind(this)
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.recipedata.recipe !==  this.props.recipedata.recipe){
+            this.setState({ instructions: [this.props.recipedata.recipe.instructions],
+                            instructionsLoaded: true})
+        }
+    }
+
     renderInstructions(){
-        return(
-            <ol>
-            {this.state.instructions.map((instruction, key)=>{
-                return(
-                    <li key={key}>{instruction}</li>
-                )
-            })}
-            </ol>
-        )
+        if(this.state.instructionsLoaded){
+            return(
+                <ol>
+                {this.state.instructions.map((instruction, key)=>{
+                    return(
+                        <li key={key}>{instruction}</li>
+                    )
+                })}
+                </ol>
+            )
+        }
     }
 
     render() {
@@ -31,9 +43,9 @@ class RecipeInstructions extends Component {
             <div className="recipeInstructions">
                 <Card className="card">
                     <Card.Body>
-                        <Card.Text className="cardText">
+                        <div className="cardText">
                             {this.renderInstructions()}
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>
@@ -42,4 +54,10 @@ class RecipeInstructions extends Component {
 
 }
 
-  export default withRouter(RecipeInstructions);
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      recipedata: state.recipe.recipe,
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, null)(RecipeInstructions));

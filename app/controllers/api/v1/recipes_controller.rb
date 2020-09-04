@@ -3,6 +3,7 @@ module Api
         class RecipesController < ApplicationController
             
             def index
+                debugger
                 if params[:user_id] 
                     user = current_api_v1_user()
                     @recipes = user.recipes.last(10).reverse
@@ -18,8 +19,8 @@ module Api
             end
 
             def show
-                @recipe = Recipe.find_by(slug: params[:slug])
-                render json: @recipe, status: 201
+                @recipe = Recipe.find_by(name: params[:name])
+                render json: {recipe: @recipe, ingredients: @recipe.ingredients, quantities: @recipe.quantities}, status: 201
             end
 
             def search

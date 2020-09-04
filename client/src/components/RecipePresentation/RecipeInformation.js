@@ -5,40 +5,43 @@ import './RecipeInformation.css'
 
 class RecipeInformation extends Component {
     
-
     render() {
-
         return(
             <div className="recipeInformation">
                 <Card className="card">
                     <Card.Body>
-                        <Card.Text className="cardText">
+                        <div className="cardText">
                             <table className="preparationInformationTable">
-                                <tr>
-                                    <td className="tableLabel"> Preparation time:</td>
-                                    <td className="tableMeasure">10 min</td>
-                                </tr>
-                                <tr>
-                                    <td className="tableLabel">Cooking time:</td>
-                                    <td className="tableMeasure">20 min</td>
-                                </tr>
-                                <tr>
-                                    <td className="tableLabel">Total time:</td>
-                                    <td className="tableMeasure">30 min</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className="tableLabel"> Preparation time:</td>
+                                        <td className="tableMeasure">{this.props.preparation_time} min</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="tableLabel">Cooking time:</td>
+                                        <td className="tableMeasure">{this.props.cooking_time} min</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="tableLabel">Total time:</td>
+                                        <td className="tableMeasure">{this.props.total_recipe_time} min</td>
+                                    </tr>
+                                </tbody>
                             </table>
 
+
                             <table className="nutritionInformationTable">
-                                <tr>
-                                    <td className="tableLabel">Servings:</td>
-                                    <td className="tableMeasure">340kcal</td>
-                                </tr>
-                                <tr>
-                                    <td className="tableLabel">Calories:</td>
-                                    <td className="tableMeasure">340kcal</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className="tableLabel">Serves:</td>
+                                        <td className="tableMeasure">{this.props.servings}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="tableLabel">Calories:</td>
+                                        <td className="tableMeasure">{this.props.calories} kcal</td>
+                                    </tr>
+                                </tbody>
                             </table>
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>
@@ -47,4 +50,4 @@ class RecipeInformation extends Component {
 
 }
 
-  export default withRouter(RecipeInformation);
+export default withRouter(RecipeInformation);

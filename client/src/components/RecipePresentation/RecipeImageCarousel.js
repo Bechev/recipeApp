@@ -5,16 +5,8 @@ import './RecipeImageCarousel.css'
 
 class RecipeImageCarousel extends Component {
 
-    constructor(props){
-        super(props)
-        this.state={
-            imageList: []
-        }
-        this.renderCarousel = this.renderCarousel.bind(this)
-    }
-
     renderCarousel(){
-        if(this.state.imageList[0]==null){
+        if(this.props.images[0]==null){
             return(
                 <Carousel.Item className="carouselItem">
                     <img
@@ -26,7 +18,7 @@ class RecipeImageCarousel extends Component {
             )
         }else{
             return(
-                this.state.imageList.map((image,key)=>{
+                this.props.images.map((image,key)=>{
                     return(
                         <Carousel.Item key={key}>
                             <img
@@ -56,4 +48,4 @@ class RecipeImageCarousel extends Component {
 
 }
 
-  export default withRouter(RecipeImageCarousel);
+export default withRouter(RecipeImageCarousel);
