@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
 import {Accordion, Card} from 'react-bootstrap';
+import {fetchUserLastMealPlan } from '../services/actions/mealplan.js'
 import MealViewer from './MealViewer.js'
 
 
@@ -12,6 +14,11 @@ class MealPlanFilters extends Component {
             daysList: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Friday"],
         }
         this.renderDays = this.renderDays.bind(this)
+    }
+
+
+    componentDidMount(){
+        this.props.fetchUserLastMealPlan()
     }
 
 
@@ -47,4 +54,16 @@ class MealPlanFilters extends Component {
 
 }
 
-  export default withRouter(MealPlanFilters);
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUserLastMealPlan: () => dispatch(fetchUserLastMealPlan()),
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MealPlanFilters));

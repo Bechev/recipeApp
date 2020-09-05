@@ -18,6 +18,7 @@ class CategoryFilters extends Component {
 
     componentDidMount(){
         this.props.fetch_categories()
+        this.props.resetFilter()
     }
 
     componentDidUpdate(prevProps){
@@ -32,7 +33,6 @@ class CategoryFilters extends Component {
     }
 
     changeFilter(filter){
-        console.log(this.props.filters)
         if(this.props.filters.includes(filter)){
             this.props.removeFilter(filter, this.props.filters)
         }else if(filter==='rest'){

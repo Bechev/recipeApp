@@ -21,6 +21,9 @@ module Api
                 render json: {ingredients: @groceries_list.ingredients.uniq, quantities: quantities}
             end
 
+            def show
+            end
+
         end
     end
 end

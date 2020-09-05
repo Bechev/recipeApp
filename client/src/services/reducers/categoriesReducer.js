@@ -13,6 +13,7 @@ export default function categoriesReducer(state = {
                 isLoaded: false}
         
         case 'LOAD_CATEGORIES_SUCCESS':
+        console.log(action.payload)
             return  {
                 ...state,
                 isLoaded: true,
@@ -27,7 +28,7 @@ export default function categoriesReducer(state = {
         case 'ADDING_FILTER':
             return{
                 ...state,
-                filters: state.filters.concat(action.payload),
+                filters: [].concat(action.payload),
                 isLoaded: false,
             }
 
@@ -48,7 +49,7 @@ export default function categoriesReducer(state = {
         case 'REMOVING_FILTER':
             return{
                 ...state,
-                filters: state.filters.filter(e => e !== action.payload),
+                filters: [].concat(action.payload),
                 isLoaded: false,
             }
 
@@ -66,10 +67,24 @@ export default function categoriesReducer(state = {
                 errorMessage: action.payload.message
             }
 
-        case 'RESET_FILTER':
+        case 'RESETTING_FILTER':
             return{
                 ...state,
                 filters: []
+            }
+
+        case 'RESETTING_FILTER_SUCCESS':
+            return{
+                ...state,
+                filteredRecipes: [].concat(action.payload),
+                isLoaded: true
+            }
+        
+        case 'RESETTING_FILTER_FAILURE':
+            return{
+                ...state,
+                isLoaded: true,
+                errorMessage: action.payload.message
             }
 
         default:

@@ -20,7 +20,8 @@ class MealViewer extends Component {
         return(
             meal.recipes.map((recipe, key) =>{
                 return(
-                    <RecipeCard key={key}/>
+                    // <RecipeCard key={key}/>
+                    <div/>
                 )
             })
         )

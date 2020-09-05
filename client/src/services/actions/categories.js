@@ -10,8 +10,8 @@ export function fetch_categories(){
             },
         })
         .then(response => response.json())
-        .then(post => { 
-            dispatch({type:'LOAD_CATEGORIES_SUCCESS', payload: post})
+        .then(response => { 
+            dispatch({type:'LOAD_CATEGORIES_SUCCESS', payload: response})
         })
         .catch(error =>{
             dispatch({type:'LOAD_CATEGORIES_FAILURE', payload: error, error:true})
@@ -23,23 +23,18 @@ export function addFilter(filter, filters){
     return (dispatch) => {
         const strUser = localStorage.getItem('user')
         let user = JSON.parse(strUser)
-        let URLFilterString
-        if(filters===[]){
-            URLFilterString = filter
-        }else{
-            URLFilterString = filter + "," + filters.join (",")
-        }
-        dispatch({ type: 'ADDING_FILTER', payload: filter });    
-        return fetch("http://localhost:3000/api/v1/categories?name=" +URLFilterString ,{
-            method: "GET",
+        filters.push(filter)
+        dispatch({ type: 'ADDING_FILTER', payload: filters });    
+        return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
+            method: "POST", 
             cache: "no-cache",
             credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "uid": user.uid,
-                "client":  user.client,
-                "access-token":  user['access-token']
             },
+            body:JSON.stringify({
+                filters: filters
+            }),
         })
         .then(response => response.json())
         .then(filteredRecipes => { 
@@ -55,18 +50,18 @@ export function removeFilter(filter, filters){
     return (dispatch) => {
         const strUser = localStorage.getItem('user')
         let user = JSON.parse(strUser)
-        let URLFilterString = filter + "," + filters.join (",")
-        dispatch({ type: 'REMOVING_FILTER', payload: filter });    
-        return fetch("http://localhost:3000/api/v1/categories?name=" +URLFilterString ,{
-            method: "GET",
+        filters = filters.filter(function(e) { return e !== filter })
+        dispatch({ type: 'REMOVING_FILTER', payload: filters });    
+        return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
+            method: "POST",
             cache: "no-cache",
             credentials: "same-origin",
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "uid": user.uid,
-                "client":  user.client,
-                "access-token":  user['access-token']
+               "Content-Type": "application/json; charset=utf-8",
             },
+            body:JSON.stringify({
+                filters: filters
+            }),
         })
         .then(response => response.json())
         .then(filteredRecipes => { 
@@ -78,8 +73,29 @@ export function removeFilter(filter, filters){
     }
 };
 
+
 export function resetFilter(){
-    return{
-        type: 'RESET_FILTER',
+    return (dispatch) => {
+        const strUser = localStorage.getItem('user')
+        let user = JSON.parse(strUser)
+        dispatch({ type: 'RESETTING_FILTER'});    
+        return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
+            method: "POST",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body:JSON.stringify({
+                filters: []
+            }),
+        })
+        .then(response => response.json())
+        .then(recipes => { 
+            dispatch({type:'RESETTING_FILTER_SUCCESS', payload: recipes })
+        })
+        .catch(error =>{
+            dispatch({type:'RESETTING_FILTER_FAILURE', payload: error, error:true})
+        })
     }
-}
+};
