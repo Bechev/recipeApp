@@ -1,5 +1,6 @@
 export default function authReducer(state = {
     isLoaded: false,
+    userLoggedIn: false,
 }, action) {
 
     switch (action.type) {
@@ -13,6 +14,7 @@ export default function authReducer(state = {
         case 'SIGN_IN_USER_SUCCESS':
             return  {
                 isLoaded: true,
+                userLoggedIn: true,
                 user: action.payload}
 
         case 'SIGN_IN_USER_FAILURE':
@@ -46,6 +48,7 @@ export default function authReducer(state = {
         case 'CREDENTIAL_VERIFICATION_SUCCESS':
             return  {
                 isLoaded: true,
+                userLoggedIn: true,
                 user: action.payload}                
 
         case 'CREDENTIAL_VERIFICATION_FAILURE':
@@ -63,6 +66,7 @@ export default function authReducer(state = {
         case 'SIGN_OUT_USER_SUCCESS':
             return  {
                 isLoaded: true,
+                userLoggedIn: false,
                     }                
 
         case 'SIGN_OUT_USER_FAILURE':
@@ -80,7 +84,7 @@ export default function authReducer(state = {
         case 'SIGN_UP_USER_SUCCESS':
             return  {
                 isLoaded: true,
-                pendingEmailConfirmation: true,
+                // pendingEmailConfirmation: true,
                 user: action.payload}
 
         case 'SIGN_UP_USER_FAILURE':

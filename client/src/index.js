@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
+import {BrowserRouter} from 'react-router-dom'
 import configurestore from './services/store.js';
 
 const store = configurestore()
@@ -12,9 +13,11 @@ serviceWorker.unregister();
 
 ReactDOM.render(
   <Provider store={store}>
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
 );

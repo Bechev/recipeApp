@@ -69,8 +69,12 @@ export function logout(history){
             "access-token":  user['access-token']
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            localStorage.removeItem('user');
+            return response.json()
+            })
         .then(response=>{
+            console.log(response)
             if(!response.success) throw new Error(response.errors)
             else {
                 dispatch({type: "SIGN_OUT_USER_SUCCESS", payload: response});

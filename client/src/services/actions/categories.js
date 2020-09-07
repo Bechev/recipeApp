@@ -21,8 +21,8 @@ export function fetch_categories(){
 
 export function addFilter(filter, filters){
     return (dispatch) => {
-        const strUser = localStorage.getItem('user')
-        let user = JSON.parse(strUser)
+        // const strUser = localStorage.getItem('user')
+        // let user = JSON.parse(strUser)
         filters.push(filter)
         dispatch({ type: 'ADDING_FILTER', payload: filters });    
         return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
@@ -48,8 +48,8 @@ export function addFilter(filter, filters){
 
 export function removeFilter(filter, filters){
     return (dispatch) => {
-        const strUser = localStorage.getItem('user')
-        let user = JSON.parse(strUser)
+        // const strUser = localStorage.getItem('user')
+        // let user = JSON.parse(strUser)
         filters = filters.filter(function(e) { return e !== filter })
         dispatch({ type: 'REMOVING_FILTER', payload: filters });    
         return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
@@ -76,8 +76,8 @@ export function removeFilter(filter, filters){
 
 export function resetFilter(){
     return (dispatch) => {
-        const strUser = localStorage.getItem('user')
-        let user = JSON.parse(strUser)
+        // const strUser = localStorage.getItem('user')
+        // let user = JSON.parse(strUser)
         dispatch({ type: 'RESETTING_FILTER'});    
         return fetch("http://localhost:3000/api/v1/filteredRecipes" ,{
             method: "POST",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, Form, FormControl} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
 import SearchResults from './SearchResults.js'
 import './CustomNavBar.css'
 
@@ -49,10 +50,11 @@ class CustomNavBar extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                        <Nav.Link href="/mealplan">Mealplan</Nav.Link>
-                        <Nav.Link href="/shopping_bag">My Cart</Nav.Link>
+                        {this.props.user ? <Nav.Link href="/mealplan">Mealplan</Nav.Link>: null}
                         <Nav.Link href="/browse">Browse</Nav.Link>
-                        <Nav.Link href="/profile">Profile</Nav.Link>
+                        {this.props.user ? <Nav.Link href="/shopping_bag">My Cart</Nav.Link> : <Nav.Link href="/signup">Signup</Nav.Link>}
+                        {this.props.user ? <Nav.Link href="/profile">Profile</Nav.Link>: <Nav.Link href="/login">Login</Nav.Link>}
+                        
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -63,4 +65,10 @@ class CustomNavBar extends Component {
 
 }
 
-  export default withRouter(CustomNavBar);
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.auth.user
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, null)(CustomNavBar));
