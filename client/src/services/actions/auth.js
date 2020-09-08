@@ -45,12 +45,15 @@ export function verify_credentials(){
                 "access-token": user['access-token']
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            return response.json()
+            })
         .then(response=>{
             if(!response.success) throw new Error(response.errors)
             else dispatch({type: "CREDENTIAL_VERIFICATION_SUCCESS", payload: response.data})
         })  
         .catch(error=>{
+            localStorage.removeItem('user');
             dispatch({type:'CREDENTIAL_VERIFICATION_FAILURE', payload: error, error:true})
         })
     })
