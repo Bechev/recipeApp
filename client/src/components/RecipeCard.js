@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Card, Button, Modal} from 'react-bootstrap';
+import {Card, Button, Modal, Form} from 'react-bootstrap';
 import {withRouter, Link, Redirect} from 'react-router-dom';
+import {addOrRemoveRecipeToMealplan } from '../services/actions/mealplan.js'
+import { connect } from 'react-redux'
 import image_placeholder from '../Assets/image_placeholder.jpg'
 import CardControlPanel from './CardControlPanel.js'
 import './RecipeCard.css'
@@ -14,10 +16,25 @@ class RecipeCard extends Component {
         this.state = {
             diplayAddToMealPlanModal: false,
             isInMealPlan: false,
+            days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            guests: 2
         }
         this.redirectToRecipe = this.redirectToRecipe.bind(this)
         this.addToMealPlan = this.addToMealPlan.bind(this)
         this.handleClose = this.handleClose.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.addGuest = this.addGuest.bind(this)
+        this.removeGuest = this.removeGuest.bind(this)
+    }
+
+    addGuest(){
+        console.log('added guest')
+        this.setState({guests: this.state.guests + 1})
+    }
+
+    removeGuest(){
+        console.log('removed guest')
+        this.setState({guests: Math.max(1, this.state.guests - 1)})
     }
 
     redirectToRecipe(){
@@ -26,28 +43,72 @@ class RecipeCard extends Component {
     }    
 
     addToMealPlan(){
+        console.log('plop')
         this.setState({diplayAddToMealPlanModal: true})
     }
 
+    handleSubmit(event){
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(this.props.mealplan)
+        const form = event.currentTarget;
+        console.log(form.formDay)
+        if (form.formMeal.value === "") {
+            console.log('plop')
+        }else{
+            this.props.addOrRemoveRecipeToMealplan('A2dd', this.props.mealplan.id, form.formDay.value, form.formMeal.value, this.props.recipe.id, this.state.guests)
+        }
+
+    };
+
     handleClose(){
         this.setState({diplayAddToMealPlanModal: false})
+    }
+
+    renderDayOptions(){
+        return(
+            this.state.days.map((day)=>{
+                return(
+                    <option key={day}>{day}</option>
+                )
+            })
+        )
     }
 
     renderAddToMealPlanModal(){
         return(
             <Modal show={this.state.diplayAddToMealPlanModal} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Add {this.props.recipe.name} to your Mealplan</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={this.handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                <Form onSubmit={this.handleSubmit}>
+                    <Modal.Body>
+                            <Form.Group controlId="formDay">
+                                <Form.Label>Day</Form.Label>
+                                <Form.Control as="select" defaultValue={this.state.days.first}>
+                                    {this.renderDayOptions()}
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId="formMeal">
+                                <Form.Label>Meal</Form.Label>
+                                <Form.Control type="text" placeholder="Meal" />
+                                <Form.Control.Feedback type="invalid">
+                                    Cannot be empty
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" type='submit'>
+                                Submit
+                            </Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         )
     }
@@ -61,7 +122,7 @@ class RecipeCard extends Component {
                     <Card.Img onClick={this.redirectToRecipe} variant="top" src={image_placeholder} />
                     <Card.Body>
                         <Card.Title className="title" onClick={this.redirectToRecipe}>{this.props.recipe.name}</Card.Title>
-                        <CardControlPanel className="controlPanel"/>
+                        <CardControlPanel addGuest={this.addGuest} removeGuest={this.removeGuest} guests={this.state.guests} className="controlPanel"/>
                         {this.state.isInMealPlan ? null : <Button className="button" variant="primary" onClick={this.addToMealPlan}>Add to MealPlan</Button>}
                     </Card.Body>
                 </Card>
@@ -71,4 +132,17 @@ class RecipeCard extends Component {
 
 }
 
-  export default withRouter(RecipeCard);
+const mapStateToProps = (state, ownProps) => {
+    return {
+      mealplan: state.mealplan,
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addOrRemoveRecipeToMealplan: (action, mealplan_id, day_name, meal_name, recipe_id, multiplicator) => dispatch(addOrRemoveRecipeToMealplan(action, mealplan_id, day_name, meal_name, recipe_id, multiplicator)),
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipeCard));

@@ -13,24 +13,10 @@ class CardControlPanel extends Component {
             recipeCalories: 160,
             recipeCookingTime: 50,
         }
-        this.addGuest = this.addGuest.bind(this)
-        this.removeGuest = this.removeGuest.bind(this)
+        
     }
     
-    addGuest(event){
-        event.preventDefault();
-        event.stopPropagation();
-        let guests = this.state.guests + 1
-        this.setState({guests: guests})
-
-    }
-
-    removeGuest(event){
-        event.preventDefault();
-        event.stopPropagation();
-        let guests = Math.max(1, this.state.guests - 1)
-        this.setState({guests: guests})
-    }
+  
 
     render() {
 
@@ -47,10 +33,10 @@ class CardControlPanel extends Component {
                 </div>
                 <div className="guestControls">
                     <div className="guestControlButtons">
-                        <button className="guestButton plus" onClick={this.addGuest}>+</button>
-                        <button className="guestButton minus" onClick={this.removeGuest}>-</button>
+                        <button className="guestButton plus" onClick={this.props.addGuest}>+</button>
+                        <button className="guestButton minus" onClick={this.props.removeGuest}>-</button>
                     </div>
-                    <div className="guestCounter">{this.state.guests}</div>
+                    <div className="guestCounter">{this.props.guests}</div>
                 </div>
 
             </div>

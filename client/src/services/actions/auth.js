@@ -37,7 +37,6 @@ export function verify_credentials(){
         const strUser = localStorage.getItem('user')
         let user = JSON.parse(strUser)
         dispatch({type: "CREDENTIAL_VERIFICATION"})
-        console.log("user " + user)
         return fetch("http://localhost:3000/api/v1/auth/validate_token", {
             headers:{
                 "uid": user.uid,

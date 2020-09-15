@@ -47,7 +47,7 @@ class CategoryFilters extends Component {
             <ButtonGroup className='promotedCategories' aria-label="Basic example">
                 {this.state.promotedCategories.map((category, key) =>{
                     return(
-                            <Button variant="secondary">{category}</Button>
+                            <Button key={key} variant="secondary">{category}</Button>
                     )
                 })}
             </ButtonGroup>

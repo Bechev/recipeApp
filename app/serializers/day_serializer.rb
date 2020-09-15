@@ -1,6 +1,10 @@
 class DaySerializer < ActiveModel::Serializer
     attributes :id, :name
-#   belongs_to :mealplan
     has_many :meals
-    # has_many :mealplans
+
+    # def meals
+    #     object.meals.collect do |meal|
+    #       { :recipes => meal.recipes }
+    #     end
+    # end
 end

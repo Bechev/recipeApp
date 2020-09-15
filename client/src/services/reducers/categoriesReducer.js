@@ -13,7 +13,6 @@ export default function categoriesReducer(state = {
                 isLoaded: false}
         
         case 'LOAD_CATEGORIES_SUCCESS':
-        console.log(action.payload)
             return  {
                 ...state,
                 isLoaded: true,

@@ -25,7 +25,7 @@ class CategoryViewer extends Component {
             <React.Fragment>
                 {this.state.recipes.map((recipe, key) =>{
                     return(
-                            <RecipeCard key={key} recipe={recipe}/>
+                        <RecipeCard key={key} recipe={recipe}/>
                     )
                 })}
             </React.Fragment>

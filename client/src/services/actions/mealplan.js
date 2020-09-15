@@ -12,11 +12,13 @@ export function fetchUserLastMealPlan(){
             }
         })
         .then(response => response.json())
-        .then(mealplan => {
-            dispatch({type:'GET_MEALPLAN_SUCCESS', payload: mealplan})
+        .then(response => {
+            console.log(response)
+            //  if(response.status !== 200) throw new Error(response.error)
+            dispatch({type:'GET_MEALPLAN_SUCCESS', payload: response})
         })
         .catch(error =>{
-            dispatch({type:'GET_MEALPLAN_FAILURE', payload: error, error:true})
+            dispatch({type:'GET_MEALPLAN_FAILURE', payload: error})
         })
     }    
 };
@@ -75,7 +77,7 @@ export function updateMealMultiplicator(to_do,  multiplicator_id){
     }    
 };
 
-export function addOrRemoveRecipeToMealplan(action,  mealplan_id, day_name, meal_name, recipe_id, multiplicator){
+export function addOrRemoveRecipeToMealplan(action, mealplan_id, day_name, meal_name, recipe_id, multiplicator){
     return (dispatch) => {
         const strUser = localStorage.getItem('user')
         let user = JSON.parse(strUser)

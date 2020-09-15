@@ -9,13 +9,13 @@ module Api
                 if request.headers["uid"] 
                     @user = current_api_v1_user()
                     @mealplans = @user.mealplans.last(10)
-                    render json: @mealplans, include: '**'
+                    render json: @mealplans
                 end
             end
 
             def userLastMealplan
                 @user = current_api_v1_user()
-                render json: @user.mealplans.all.last, include: "**"
+                render json: @user.mealplans.all.last, include: 'days.**'
             end
 
             def create
@@ -24,14 +24,13 @@ module Api
                 @user.ingredients = []
                 # debugger
                 @mealplan = Mealplan.create(name: params[:mealplan_name], user_id: @user.id)
-                render json: @mealplan, include: "**"
+                render json: @mealplan
             end
 
             def show
-                debugger
                 if params[:id]
                     @mealplan = Mealplan.find(params[:id])
-                    render json: @mealplan, include: "**"
+                    render json: @mealplan
                 else
                     render json: {errors: "Mealplan does not exist"}, status: 422
                 end
@@ -39,7 +38,6 @@ module Api
 
 
             def update
-                # debugger
                 @user = current_api_v1_user()
                 @mealplan = Mealplan.find(params[:id])
                 response = @mealplan.addOrRemoveRecipe(params["to-do"], @user.id, params["day-name"], params["meal-name"], params["recipe-id"], params["multiplicator"])
