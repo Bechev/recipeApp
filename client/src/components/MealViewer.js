@@ -33,7 +33,7 @@ class MealViewer extends Component {
                 {meal.recipes.map((recipe, key) =>{
                     recipe_quantities_multiplicator = this.retrieveRecipeQuantitiesMultiplicator(recipe.id, quantities_multiplicators)
                     return(
-                        <RecipeToast key={key} recipe={recipe} quantities_multiplicator={recipe_quantities_multiplicator}/>
+                        <RecipeToast key={key} day={this.props.day} meal={meal} recipe={recipe} quantities_multiplicator={recipe_quantities_multiplicator}/>
                     )
                 })}
             </div>

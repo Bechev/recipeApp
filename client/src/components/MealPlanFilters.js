@@ -32,7 +32,7 @@ class MealPlanFilters extends Component {
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={key+1}>
                             <Card.Body>
-                                <MealViewer meals={day.meals}/>
+                                <MealViewer day={day} meals={day.meals}/>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>

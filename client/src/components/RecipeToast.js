@@ -9,15 +9,24 @@ import '../transversal CSS/button.css'
 
 class RecipeToast extends Component {
 
+        constructor(props){
+        super(props)
+        this.handleClose = this.handleClose.bind(this)
+    }
+
     redirectToRecipe(){
         let path = `/recipe/${this.props.recipe.name}`;
         this.props.history.push(path);
+    }
+
+    handleClose(){
+        this.props.addOrRemoveRecipeToMealplan("Remove", this.props.mealplan.id, this.props.day.name, this.props.meal.name, this.props.recipe.id, this.props.quantities_multiplicator.multiplicator)
     }    
 
     render() {
 
         return(
-            <Toast className='recipeToast'>
+            <Toast className='recipeToast' onClose={this.handleClose}>
                 <Toast.Header>
                     <strong className="mr-auto">{this.props.recipe.name}</strong>
                 </Toast.Header>
