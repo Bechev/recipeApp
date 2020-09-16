@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Card, Button, Modal, Form} from 'react-bootstrap';
-import {withRouter, Link, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {addOrRemoveRecipeToMealplan } from '../services/actions/mealplan.js'
 import { connect } from 'react-redux'
 import image_placeholder from '../Assets/image_placeholder.jpg'

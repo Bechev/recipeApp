@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Toast, Button} from 'react-bootstrap';
-import {withRouter, Link, Redirect} from 'react-router-dom';
+import Toast from 'react-bootstrap/Toast';
+import {withRouter} from 'react-router-dom';
 import {addOrRemoveRecipeToMealplan } from '../services/actions/mealplan.js'
 import { connect } from 'react-redux'
 import './RecipeToast.css'
@@ -19,9 +19,7 @@ class RecipeToast extends Component {
         return(
             <Toast className='recipeToast'>
                 <Toast.Header>
-                    {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
                     <strong className="mr-auto">{this.props.recipe.name}</strong>
-                    {/* <small>11 mins ago</small> */}
                 </Toast.Header>
                 <Toast.Body>Guests: {this.props.quantities_multiplicator.multiplicator}</Toast.Body>
             </Toast>

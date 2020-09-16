@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import {Toast} from 'react-bootstrap';
 import RecipeToast from './RecipeToast.js'
 import './MealViewer.css'
 
@@ -22,6 +21,7 @@ class MealViewer extends Component {
             if(multiplicator.recipe_id === recipe_id){
                 quantities_multiplicator =  multiplicator
             }
+            return null
         })  
         return quantities_multiplicator
     }
@@ -32,7 +32,6 @@ class MealViewer extends Component {
             <div className="mealRecipes">
                 {meal.recipes.map((recipe, key) =>{
                     recipe_quantities_multiplicator = this.retrieveRecipeQuantitiesMultiplicator(recipe.id, quantities_multiplicators)
-                    console.log(recipe_quantities_multiplicator)
                     return(
                         <RecipeToast key={key} recipe={recipe} quantities_multiplicator={recipe_quantities_multiplicator}/>
                     )

@@ -13,8 +13,6 @@ export function fetchUserLastMealPlan(){
         })
         .then(response => response.json())
         .then(response => {
-            console.log(response)
-            //  if(response.status !== 200) throw new Error(response.error)
             dispatch({type:'GET_MEALPLAN_SUCCESS', payload: response})
         })
         .catch(error =>{
