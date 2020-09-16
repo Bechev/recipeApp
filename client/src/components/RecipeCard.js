@@ -15,7 +15,6 @@ class RecipeCard extends Component {
         super(props)
         this.state = {
             diplayAddToMealPlanModal: false,
-            isInMealPlan: false,
             days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             guests: 2
         }
@@ -28,12 +27,10 @@ class RecipeCard extends Component {
     }
 
     addGuest(){
-        console.log('added guest')
         this.setState({guests: this.state.guests + 1})
     }
 
     removeGuest(){
-        console.log('removed guest')
         this.setState({guests: Math.max(1, this.state.guests - 1)})
     }
 
@@ -43,7 +40,6 @@ class RecipeCard extends Component {
     }    
 
     addToMealPlan(){
-        console.log('plop')
         this.setState({diplayAddToMealPlanModal: true})
     }
 
@@ -56,7 +52,7 @@ class RecipeCard extends Component {
         if (form.formMeal.value === "") {
             console.log('plop')
         }else{
-            this.props.addOrRemoveRecipeToMealplan('A2dd', this.props.mealplan.id, form.formDay.value, form.formMeal.value, this.props.recipe.id, this.state.guests)
+            this.props.addOrRemoveRecipeToMealplan('Add', this.props.mealplan.id, form.formDay.value, form.formMeal.value, this.props.recipe.id, this.state.guests)
         }
 
     };
@@ -117,13 +113,13 @@ class RecipeCard extends Component {
 
         return(
             <div className="recipeCard">
-            {this.renderAddToMealPlanModal()}
+                {this.renderAddToMealPlanModal()}
                 <Card>
                     <Card.Img onClick={this.redirectToRecipe} variant="top" src={image_placeholder} />
                     <Card.Body>
                         <Card.Title className="title" onClick={this.redirectToRecipe}>{this.props.recipe.name}</Card.Title>
                         <CardControlPanel addGuest={this.addGuest} removeGuest={this.removeGuest} guests={this.state.guests} className="controlPanel"/>
-                        {this.state.isInMealPlan ? null : <Button className="button" variant="primary" onClick={this.addToMealPlan}>Add to MealPlan</Button>}
+                        <Button className="button" variant="primary" onClick={this.addToMealPlan}>Add to MealPlan</Button>
                     </Card.Body>
                 </Card>
             </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import {Card} from 'react-bootstrap';
-import RecipeCard from './RecipeCard.js'
+import {Toast} from 'react-bootstrap';
+import RecipeToast from './RecipeToast.js'
 import './MealViewer.css'
 
 
@@ -16,27 +16,39 @@ class MealViewer extends Component {
         this.renderMealRecipes = this.renderMealRecipes.bind(this)
     }
 
-    renderMealRecipes(meal){
+    retrieveRecipeQuantitiesMultiplicator(recipe_id, quantities_multiplicators){
+        let quantities_multiplicator
+        quantities_multiplicators.map((multiplicator) => {
+            if(multiplicator.recipe_id === recipe_id){
+                quantities_multiplicator =  multiplicator
+            }
+        })  
+        return quantities_multiplicator
+    }
+
+    renderMealRecipes(meal, quantities_multiplicators){
+        let recipe_quantities_multiplicator
         return(
-            meal.recipes.map((recipe, key) =>{
-                return(
-                    // <RecipeCard key={key}/>
-                    <div/>
-                )
-            })
+            <div className="mealRecipes">
+                {meal.recipes.map((recipe, key) =>{
+                    recipe_quantities_multiplicator = this.retrieveRecipeQuantitiesMultiplicator(recipe.id, quantities_multiplicators)
+                    console.log(recipe_quantities_multiplicator)
+                    return(
+                        <RecipeToast key={key} recipe={recipe} quantities_multiplicator={recipe_quantities_multiplicator}/>
+                    )
+                })}
+            </div>
         )
     }
 
     renderMealViewer(){
         return(
-            this.state.mealList.map((meal, key) =>{
+            this.props.meals.map((meal, key) =>{
                 return(
-                    <Card key={key} className="meal">
-                        <h3>{meal.name}</h3>
-                        <div className="mealRecipes">
-                            {this.renderMealRecipes(meal)}
-                        </div>
-                    </Card>
+                    <div className="meal" key={key}>
+                        <div className="mealTitle">{meal.name}</div>
+                        {this.renderMealRecipes(meal, meal.quantities_multiplicators)}
+                    </div>
                 )
             })
         )

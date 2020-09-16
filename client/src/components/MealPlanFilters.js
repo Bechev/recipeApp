@@ -24,15 +24,15 @@ class MealPlanFilters extends Component {
 
     renderDays(){
         return(
-            this.state.daysList.map((day, key) =>{
+            this.props.mealplan.days.map((day, key) =>{
                 return(
                     <Card key={key}>
                         <Accordion.Toggle  as={Card.Header} eventKey={key+1}>
-                            {day}
+                            {day.name}
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={key+1}>
                             <Card.Body>
-                                <MealViewer/>
+                                <MealViewer meals={day.meals}/>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -56,7 +56,8 @@ class MealPlanFilters extends Component {
 
   const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.auth.user
+      user: state.auth.user,
+      mealplan: state.mealplan
     }
   }
 
