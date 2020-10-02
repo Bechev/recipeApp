@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from 'react-redux'
 import {verify_credentials } from './services/actions/auth.js'
 import {fetchUserLastMealPlan } from './services/actions/mealplan.js'
+import {fetchGroceriesList } from './services/actions/groceriesList.js'
 import {withRouter} from 'react-router-dom';
 import Routes from './services/Routes/Routes.js'
 
@@ -13,6 +14,7 @@ class App extends React.Component{
         if(user){
             this.props.verify_credentials()
             this.props.fetchUserLastMealPlan()
+            this.props.fetchGroceriesList()
         }
     }
 
@@ -31,7 +33,8 @@ class App extends React.Component{
 const mapDispatchToProps = dispatch => {
     return {
         verify_credentials: () => dispatch(verify_credentials()),
-        fetchUserLastMealPlan: () => dispatch(fetchUserLastMealPlan())
+        fetchUserLastMealPlan: () => dispatch(fetchUserLastMealPlan()),
+        fetchGroceriesList: () => dispatch(fetchGroceriesList())
     }
 }
 

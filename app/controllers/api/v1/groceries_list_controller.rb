@@ -13,9 +13,13 @@ module Api
                     @mealplan = Mealplan.find(params[:mealplan_id])
                 end
 
-                @groceries_list = @mealplan.groceries_list
-                @groceries_list ||= GroceriesList.create(mealplan_id: @mealplan.id)
-
+                if !@mealplan.groceries_list
+                    # debugger
+                    @groceries_list = GroceriesList.create(mealplan_id: @mealplan.id)
+                else
+                    @groceries_list = @mealplan.groceries_list 
+                end
+                # debugger
                 quantities = @groceries_list.generate
 
                 render json: {ingredients: @groceries_list.ingredients.uniq, quantities: quantities}

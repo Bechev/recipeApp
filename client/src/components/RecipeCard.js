@@ -46,13 +46,12 @@ class RecipeCard extends Component {
     handleSubmit(event){
         event.preventDefault();
         event.stopPropagation();
-        console.log(this.props.mealplan)
         const form = event.currentTarget;
-        console.log(form.formDay)
         if (form.formMeal.value === "") {
             console.log('plop')
         }else{
             this.props.addOrRemoveRecipeToMealplan('Add', this.props.mealplan.id, form.formDay.value, form.formMeal.value, this.props.recipe.id, this.state.guests)
+            this.setState({diplayAddToMealPlanModal: false})
         }
 
     };
